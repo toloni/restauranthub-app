@@ -1,0 +1,260 @@
+@host=http://localhost:8080
+@owner_id=868cb600-7dd3-4f5e-a5d4-f890eb1144ef
+@customer_id=aef7ec8d-04a6-4af8-bd3b-ab0b326ba40d
+
+### ✅ Create valid Restaurant
+POST {{host}}/api/v1/restaurants
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+{
+  "name": "The Great Burger",
+  "address": "123 Main St, Springfield",
+  "cuisineType": "American",
+  "openingHours": "Mon-Fri 9am-10pm"
+}
+
+### ❌ Create missing 'name'
+POST {{host}}/api/v1/restaurants
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+{
+  "address": "123 Main St, Springfield",
+  "cuisineType": "American",
+  "openingHours": "Mon-Fri 9am-10pm"
+}
+
+### ❌ Create missing 'address'
+POST {{host}}/api/v1/restaurants
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+{
+  "name": "The Great Gelato",
+  "cuisineType": "Italian",
+  "openingHours": "Mon-Fri 9am-10pm"
+}
+
+### ❌ Create missing 'cuisineType'
+POST {{host}}/api/v1/restaurants
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+{
+  "name": "The Great Gelato",
+  "address": "100 Paulist, St Paul",
+  "openingHours": "Mon-Fri 9am-10pm"
+}
+
+### ❌ Create missing 'openingHours'
+POST {{host}}/api/v1/restaurants
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+{
+  "name": "The Great Gelato",
+  "address": "100 Paulist, St Paul",
+  "cuisineType": "Italian"
+}
+
+### ❌ Create with duplicate 'name'
+POST {{host}}/api/v1/restaurants
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+{
+  "name": "The Great Burger",
+  "address": "123 Main St, Nice View",
+  "cuisineType": "American",
+  "openingHours": "Mon-Fri 9am-10pm"
+}
+
+### ❌ Create with non-existent owner ID in header (404 Not Found)
+POST {{host}}/api/v1/restaurants
+Content-Type: application/json
+X-User-Id: e489def3-e082-46e0-9af2-158adefb031f
+
+{
+  "name": "The Great Gelato",
+  "address": "100 Paulist, St Paul",
+  "cuisineType": "Italian",
+  "openingHours": "Mon-Sun 9am-6pm"
+}
+
+### ❌ Create with CUSTOMER role owner ID in header (403 Forbidden)
+POST {{host}}/api/v1/restaurants
+Content-Type: application/json
+X-User-Id:  {{customer_id}}
+
+{
+  "name": "The Great Gelato",
+  "address": "100 Paulist, St Paul",
+  "cuisineType": "Italian",
+  "openingHours": "Mon-Sun 9am-6pm"
+}
+
+### ❌ Create missing 'X-User-Id' header
+POST {{host}}/api/v1/restaurants
+Content-Type: application/json
+
+{
+  "name": "The Great Gelato",
+  "address": "100 Paulist, St Paul",
+  "cuisineType": "Italian",
+  "openingHours": "Mon-Sun 9am-6pm"
+}
+
+### ❌ Create with invalid 'X-User-Id' format (Invalid UUID)
+POST {{host}}/api/v1/restaurants
+Content-Type: application/json
+X-User-Id:  1123
+
+{
+  "name": "The Great Gelato",
+  "address": "100 Paulist, St Paul",
+  "cuisineType": "Italian",
+  "openingHours": "Mon-Sun 9am-6pm"
+}
+
+### -------------------------------
+### Seed Data / Bulk Insert
+### -------------------------------
+
+### Restaurant 1
+POST {{host}}/api/v1/restaurants
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+{
+  "name": "The Great Burger",
+  "address": "123 Main St, Springfield",
+  "cuisineType": "American",
+  "openingHours": "Mon-Fri 9am-10pm"
+}
+
+###
+
+### Restaurant 2
+POST {{host}}/api/v1/restaurants
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+{
+  "name": "La Bella Italia",
+  "address": "456 Olive Ave, New York",
+  "cuisineType": "Italian",
+  "openingHours": "Tue-Sun 11am-11pm"
+}
+
+###
+
+### Restaurant 3
+POST {{host}}/api/v1/restaurants
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+{
+  "name": "Sakura Sushi",
+  "address": "789 Cherry Blvd, San Francisco",
+  "cuisineType": "Japanese",
+  "openingHours": "Mon-Sun 12pm-10pm"
+}
+
+###
+
+### Restaurant 4
+POST {{host}}/api/v1/restaurants
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+{
+  "name": "Le Petit Bistro",
+  "address": "321 Rue de Paris, Miami",
+  "cuisineType": "French",
+  "openingHours": "Wed-Mon 6pm-midnight"
+}
+
+###
+
+### Restaurant 5
+POST {{host}}/api/v1/restaurants
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+{
+  "name": "Taco Loco",
+  "address": "654 Sunset Blvd, Los Angeles",
+  "cuisineType": "Mexican",
+  "openingHours": "Mon-Sun 10am-11pm"
+}
+
+###
+
+### Restaurant 6
+POST {{host}}/api/v1/restaurants
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+{
+  "name": "Dragon Palace",
+  "address": "987 Golden Gate Ave, Chicago",
+  "cuisineType": "Chinese",
+  "openingHours": "Mon-Sun 11am-10pm"
+}
+
+###
+
+### Restaurant 7
+POST {{host}}/api/v1/restaurants
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+{
+  "name": "Spice Garden",
+  "address": "147 Curry Lane, Houston",
+  "cuisineType": "Indian",
+  "openingHours": "Mon-Sun 12pm-11pm"
+}
+
+###
+
+### Restaurant 8
+POST {{host}}/api/v1/restaurants
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+{
+  "name": "O Churrasco",
+  "address": "258 Avenida Brasil, Boston",
+  "cuisineType": "Brazilian",
+  "openingHours": "Tue-Sun 12pm-10pm"
+}
+
+###
+
+### Restaurant 9
+POST {{host}}/api/v1/restaurants
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+{
+  "name": "Mediterranean Breeze",
+  "address": "369 Olive St, Seattle",
+  "cuisineType": "Mediterranean",
+  "openingHours": "Mon-Sat 11am-10pm"
+}
+
+###
+
+### Restaurant 10
+POST {{host}}/api/v1/restaurants
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+{
+  "name": "Seoul Kitchen",
+  "address": "741 Kimchi Rd, Portland",
+  "cuisineType": "Korean",
+  "openingHours": "Mon-Sun 11am-11pm"
+}

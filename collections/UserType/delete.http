@@ -1,0 +1,11 @@
+@host = http://localhost:8080
+@id = e489def3-e082-46e0-9af2-158adefb031f
+
+### ✅ Delete UserType without associated users
+DELETE {{host}}/api/v1/user-types/{{id}}
+
+### ❌ Delete UserType with associated users (EntityInUseException)
+DELETE {{host}}/api/v1/user-types/<>
+
+### ❌ Delete non-existent UserType (idempotent — should return 204)
+DELETE {{host}}/api/v1/user-types/b888eea7-fc79-4337-9e03-acbba1a594b6

@@ -1,0 +1,66 @@
+@host=http://localhost:8080
+
+
+### Get User Type
+GET {{host}}/api/v1/user-types
+
+### Get User
+GET {{host}}/api/v1/users
+
+### Create User Restaurant Owner
+POST {{host}}/api/v1/users
+Content-Type: application/json
+
+{
+  "name": "Jeffrey Palermo",
+  "email": "jeffrey@mail.com",
+  "password": "onionarchitecture123",
+  "userTypeId": "023174ba-0cd5-4b14-a482-ccdbcaa1b895"
+}
+
+### 
+@userId=f3fd435b-f3fe-4c0e-a842-cc66ac6b32ff
+
+### Create Resturant
+POST {{host}}/api/v1/restaurants
+Content-Type: application/json
+X-User-Id: {{userId}}
+
+{
+  "name": "Bella Capri",
+  "address": "456 Olive Ave, New York",
+  "cuisineType": "Italian",
+  "openingHours": "Mon-Fri 9am-10pm"
+}
+
+###
+@restaurantId=9b097b88-74d3-4f38-9c53-83c8c98ac297
+
+### 
+GET {{host}}/api/v1/restaurants/{{restaurantId}}
+
+### Create Admin User
+POST {{host}}/api/v1/users
+Content-Type: application/json
+
+{
+  "name": "Tiago Toloni",
+  "email": "tiago@mail.com",
+  "password": "password123",
+  "userTypeId": "6ac3b23e-0c14-428b-837b-d523e93635ca"
+}
+
+###
+@adminId=6ddc48d7-844c-45ef-81a8-9035c135e87f
+
+### 
+GET {{host}}/api/v1/users
+
+### Update OwnerShip
+PATCH {{host}}/api/v1/restaurants/{{restaurantId}}/transfer-ownership
+Content-Type: application/json
+X-User-Id: {{adminId}}
+
+{
+  "newOwnerId": "c835a1e5-dd1c-4404-a632-91604a9d4505"
+}

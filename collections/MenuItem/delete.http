@@ -1,0 +1,27 @@
+@host=http://localhost:8080
+@menu_item_id_1=20b77569-1c2a-4bee-b32a-428e665a8529
+@menu_item_id_2=3a3e3536-8539-4012-a2e2-1eab01e29391
+@owner_id=c60959dc-5bf9-447a-9ea2-a2cd2b6bb92b
+
+### ✅ Delete existing MenuItem as owner
+DELETE {{host}}/api/v1/menu-items/{{menu_item_id_1}}
+X-User-Id: {{owner_id}}
+
+### ❌ Delete with X-User-Id different from owner (403 Forbidden)
+DELETE {{host}}/api/v1/menu-items/{{menu_item_id_2}}
+X-User-Id: 40f70b91-34eb-4129-9614-cff688f6eda9
+
+### ❌ Delete non-existent MenuItem (404 Not Found)
+DELETE {{host}}/api/v1/menu-items/40f70b91-34eb-4129-9614-cff688f6eda9
+X-User-Id: {{owner_id}}
+
+### ❌ Delete missing 'X-User-Id' header (400 Bad Request)
+DELETE {{host}}/api/v1/menu-items/{{menu_item_id_2}}
+
+### ❌ Delete with invalid 'X-User-Id' format (Invalid UUID)
+DELETE {{host}}/api/v1/menu-items/{{menu_item_id_2}}
+X-User-Id: 123
+
+### ❌ Delete with invalid menu item ID (Invalid UUID)
+DELETE {{host}}/api/v1/menu-items/123
+X-User-Id: {{owner_id}}

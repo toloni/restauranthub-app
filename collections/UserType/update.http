@@ -1,0 +1,72 @@
+@host = http://localhost:8080
+@id = e489def3-e082-46e0-9af2-158adefb031f
+
+### ✅ Update 'name'
+PATCH {{host}}/api/v1/user-types/{{id}}
+Content-Type: application/json
+
+{
+  "name": "Restaurant Customer"
+}
+
+### ✅ Update 'description'
+PATCH {{host}}/api/v1/user-types/{{id}}
+Content-Type: application/json
+
+{
+  "description": "User who can place orders."
+}
+
+### ✅ Update 'role'
+PATCH {{host}}/api/v1/user-types/{{id}}
+Content-Type: application/json
+
+{
+  "role": "CUSTOMER"
+}
+
+### ✅ Update all fields
+PATCH {{host}}/api/v1/user-types/{{id}}
+Content-Type: application/json
+
+{
+  "name": "Customer",
+  "description": "User who can browse restaurants and place orders.",
+  "role": "CUSTOMER"
+}
+
+### ❌ Update with non-existent ID (404 Not Found)
+PATCH {{host}}/api/v1/user-types/b888eea7-fc79-4337-9e03-acbba1a594b6
+Content-Type: application/json
+
+{
+  "name": "Customer",
+  "description": "User who can browse restaurants and place orders.",
+  "role": "CUSTOMER"
+}
+
+### ❌ Update with invalid ID (400 Bad Request)
+PATCH {{host}}/api/v1/user-types/1
+Content-Type: application/json
+
+{
+  "name": "Customer",
+  "description": "User who can browse restaurants and place orders.",
+  "role": "CUSTOMER"
+}
+
+### ❌ Update with duplicate 'role' from another UserType
+PATCH {{host}}/api/v1/user-types/{{id}}
+Content-Type: application/json
+
+{
+  "role": "RESTAURANT_OWNER"
+}
+
+### ❌ Update with invalid 'role'
+PATCH {{host}}/api/v1/user-types/{{id}}
+Content-Type: application/json
+
+{
+  "role": "DELIVERY_DRIVER"
+}

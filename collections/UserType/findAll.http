@@ -1,0 +1,34 @@
+@host = http://localhost:8080
+
+### ✅ List without parameters (page 0, size 10)
+GET {{host}}/api/v1/user-types
+
+### ✅ List with pagination (page=0&size=5)
+GET {{host}}/api/v1/user-types
+    ?page=0
+    &size=5
+
+### ✅ List with ASC sorting by name
+GET {{host}}/api/v1/user-types
+    ?sort=name
+    &direction=ASC
+
+### ✅ List with DESC sorting by name
+GET {{host}}/api/v1/user-types
+    ?sort=name
+    &direction=DESC
+
+### ✅ Filter by existing name
+GET {{host}}/api/v1/user-types
+    ?filter=name
+    &filterValue=Owner
+
+### ✅ Filter by non-existent name (returns empty list)
+GET {{host}}/api/v1/user-types
+    ?filter=name
+    &filterValue=Driver
+
+### ❌ Filter by invalid field (400 Bad Request)
+GET {{host}}/api/v1/user-types
+    ?filter=nome
+    &filterValue=Owner

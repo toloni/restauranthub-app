@@ -1,0 +1,78 @@
+@host = http://localhost:8080
+
+### ❌ Create missing 'name'
+POST {{host}}/api/v1/user-types
+Content-Type: application/json
+
+{
+  "description": "User who can browse restaurants and place orders.",
+  "role": "CUSTOMER"
+}
+
+### ❌ Create missing 'description'
+POST {{host}}/api/v1/user-types
+Content-Type: application/json
+
+{
+  "name": "Customer",
+  "role": "CUSTOMER"
+}
+
+### ❌ Create missing 'role'
+POST {{host}}/api/v1/user-types
+Content-Type: application/json
+
+{
+  "name": "Customer",
+  "description": "User who can browse restaurants and place orders."
+}
+
+### ❌ Create with invalid 'role' (e.g., DELIVERY_DRIVER)
+POST {{host}}/api/v1/user-types
+Content-Type: application/json
+
+{
+  "name": "Delivery Driver",
+  "description": "User responsible for delivering orders.",
+  "role": "DELIVERY_DRIVER"
+}
+
+### ✅ Create valid 'UserType' (RESTAURANT_OWNER)
+POST {{host}}/api/v1/user-types
+Content-Type: application/json
+
+{
+  "name": "Restaurant Owner",
+  "description": "User responsible for managing a restaurant.",
+  "role": "RESTAURANT_OWNER"
+}
+
+### ✅ Create valid 'UserType' (CUSTOMER)
+POST {{host}}/api/v1/user-types
+Content-Type: application/json
+
+{
+  "name": "Customer",
+  "description": "User who can browse restaurants and place orders.",
+  "role": "CUSTOMER"
+}
+
+### ✅ Create valid 'UserType' (ADMIN)
+POST {{host}}/api/v1/user-types
+Content-Type: application/json
+
+{
+  "name": "Administrator",
+  "description": "User who can management restaurants",
+  "role": "ADMIN"
+}
+
+### ❌ Create with duplicate 'role' (RESTAURANT_OWNER already exists)
+POST {{host}}/api/v1/user-types
+Content-Type: application/json
+
+{
+  "name": "Restaurant Owner",
+  "description": "User responsible for managing a restaurant.",
+  "role": "RESTAURANT_OWNER"
+}

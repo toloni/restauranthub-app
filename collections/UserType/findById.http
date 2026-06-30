@@ -1,0 +1,11 @@
+@host = http://localhost:8080
+@id = e489def3-e082-46e0-9af2-158adefb031f
+
+### ✅ Find existing UserType
+GET {{host}}/api/v1/user-types/{{id}}
+
+### ❌ Find non-existent UserType (404 Not Found)
+GET {{host}}/api/v1/user-types/aaaaaaaa-e082-46e0-9af2-158adefb031f
+
+### ❌ Find with invalid UUID (400 Bad Request)
+GET {{host}}/api/v1/user-types/11111

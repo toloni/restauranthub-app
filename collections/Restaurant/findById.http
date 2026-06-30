@@ -1,0 +1,14 @@
+@host=http://localhost:8080
+@restaurant_id=972ee2d7-10ce-4107-96da-ffd036aec622
+
+### ✅ Find existing Restaurant
+GET {{host}}/api/v1/restaurants/{{restaurant_id}}
+Content-Type: application/json
+
+### ❌ Find non-existent Restaurant (404 Not Found)
+GET {{host}}/api/v1/restaurants/c60959dc-5bf9-447a-9ea2-a2cd2b6bb92b
+Content-Type: application/json
+
+### ❌ Find with invalid UUID (400 Bad Request)
+GET {{host}}/api/v1/restaurants/123
+Content-Type: application/json

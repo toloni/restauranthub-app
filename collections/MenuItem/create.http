@@ -1,0 +1,223 @@
+@host=http://localhost:8080
+@owner_id=868cb600-7dd3-4f5e-a5d4-f890eb1144ef
+@restaurant_id=1bc46c0b-e382-4c19-bc5b-1d3ce44206da
+
+
+### ✅ Create valid MenuItem with dineInOnly false
+POST {{host}}/api/v1/menu-items
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+{
+  "name": "Caesar Salad",
+  "description": "Romaine lettuce, croutons, parmesan and caesar dressing",
+  "price": 18.90,
+  "currency": "BRL",
+  "dineInOnly": false,
+  "imagePath": "/images/caesar-salad.jpg",
+  "restaurantId": "{{restaurant_id}}"
+}
+
+### ✅ Create valid MenuItem with dineInOnly true
+POST {{host}}/api/v1/menu-items
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+{
+  "name": "Chicken Burger",
+  "description": "Crispy fried chicken with honey mustard and pickles",
+  "price": 22.90,
+  "currency": "BRL",
+  "dineInOnly": true,
+  "imagePath": "/images/chicken-burger.jpg",
+  "restaurantId": "{{restaurant_id}}"
+}
+
+### ✅ Create MenuItem without imagePath (optional field)
+POST {{host}}/api/v1/menu-items
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+{
+  "name": "BBQ Burger",
+  "description": "Smoky beef patty with BBQ sauce, onion rings and coleslaw",
+  "price": 26.90,
+  "currency": "BRL",
+  "dineInOnly": false,
+  "restaurantId": "{{restaurant_id}}"
+}
+
+### ❌ Create missing 'name'
+POST {{host}}/api/v1/menu-items
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+{
+  "description": "Creamy milkshake available in chocolate, vanilla and strawberry",
+  "price": 16.90,
+  "currency": "BRL",
+  "dineInOnly": false,
+  "imagePath": "/images/milkshake.jpg",
+  "restaurantId": "{{restaurant_id}}"
+}
+
+### ❌ Create missing 'description'
+POST {{host}}/api/v1/menu-items
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+{
+  "name": "Milkshake Diet",
+  "price": 16.90,
+  "currency": "BRL",
+  "dineInOnly": false,
+  "imagePath": "/images/milkshake.jpg",
+  "restaurantId": "{{restaurant_id}}"
+}
+
+### ❌ Create missing 'price'
+POST {{host}}/api/v1/menu-items
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+{
+  "name": "Milkshake Diet",
+  "description": "Creamy milkshake available in chocolate, vanilla and strawberry",
+  "currency": "BRL",
+  "dineInOnly": false,
+  "imagePath": "/images/milkshake.jpg",
+  "restaurantId": "{{restaurant_id}}"
+}
+
+### ❌ Create missing 'currency'
+POST {{host}}/api/v1/menu-items
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+{
+  "name": "Milkshake Diet",
+  "description": "Creamy milkshake available in chocolate, vanilla and strawberry",
+  "price": 16.90,
+  "dineInOnly": false,
+  "imagePath": "/images/milkshake.jpg",
+  "restaurantId": "{{restaurant_id}}"
+}
+
+### ❌ Create with negative price
+POST {{host}}/api/v1/menu-items
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+{
+  "name": "Milkshake Diet",
+  "description": "Creamy milkshake available in chocolate, vanilla and strawberry",
+  "price": -16.90,
+  "currency": "BRL",
+  "dineInOnly": false,
+  "imagePath": "/images/milkshake.jpg",
+  "restaurantId": "{{restaurant_id}}"
+}
+
+### ❌ Create with invalid currency code
+POST {{host}}/api/v1/menu-items
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+{
+  "name": "Milkshake Diet",
+  "description": "Creamy milkshake available in chocolate, vanilla and strawberry",
+  "price": 16.90,
+  "currency": "AAA",
+  "dineInOnly": false,
+  "imagePath": "/images/milkshake.jpg",
+  "restaurantId": "{{restaurant_id}}"
+}
+
+### ❌ Create with duplicate 'name' in the same restaurant
+POST {{host}}/api/v1/menu-items
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+{
+  "name": "Milkshake",
+  "description": "Creamy milkshake available in chocolate, vanilla and strawberry",
+  "price": 16.90,
+  "currency": "BRL",
+  "dineInOnly": false,
+  "imagePath": "/images/milkshake.jpg",
+  "restaurantId": "{{restaurant_id}}"
+}
+
+### ✅ Create with duplicate 'name' in a different restaurant
+POST {{host}}/api/v1/menu-items
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+{
+  "name": "Milkshake",
+  "description": "Creamy milkshake available in chocolate, vanilla and strawberry",
+  "price": 16.90,
+  "currency": "BRL",
+  "dineInOnly": false,
+  "imagePath": "/images/milkshake.jpg",
+  "restaurantId": "7eae2ffc-b43d-4c51-8d97-6ce5197e228f"
+}
+
+### ❌ Create with non-existent restaurantId (404 Not Found)
+POST {{host}}/api/v1/menu-items
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+{
+  "name": "Milkshake",
+  "description": "Creamy milkshake available in chocolate, vanilla and strawberry",
+  "price": 16.90,
+  "currency": "BRL",
+  "dineInOnly": false,
+  "imagePath": "/images/milkshake.jpg",
+  "restaurantId": "20b77569-1c2a-4bee-b32a-428e665a8529"
+}
+
+### ❌ Create with X-User-Id different from owner (403 Forbidden)
+POST {{host}}/api/v1/menu-items
+Content-Type: application/json
+X-User-Id: 20b77569-1c2a-4bee-b32a-428e665a8529
+
+{
+  "name": "Milkshake",
+  "description": "Creamy milkshake available in chocolate, vanilla and strawberry",
+  "price": 16.90,
+  "currency": "BRL",
+  "dineInOnly": false,
+  "imagePath": "/images/milkshake.jpg",
+  "restaurantId": "{{restaurant_id}}"
+}
+
+### ❌ Create missing 'X-User-Id' header (400 Bad Request)
+POST {{host}}/api/v1/menu-items
+Content-Type: application/json
+
+{
+  "name": "Milkshake",
+  "description": "Creamy milkshake available in chocolate, vanilla and strawberry",
+  "price": 16.90,
+  "currency": "BRL",
+  "dineInOnly": false,
+  "imagePath": "/images/milkshake.jpg",
+  "restaurantId": "{{restaurant_id}}"
+}
+
+### ❌ Create with invalid 'X-User-Id' format (Invalid UUID)
+POST {{host}}/api/v1/menu-items
+Content-Type: application/json
+X-User-Id: 123
+
+{
+  "name": "Milkshake",
+  "description": "Creamy milkshake available in chocolate, vanilla and strawberry",
+  "price": 16.90,
+  "currency": "BRL",
+  "dineInOnly": false,
+  "imagePath": "/images/milkshake.jpg",
+  "restaurantId": "{{restaurant_id}}"
+}

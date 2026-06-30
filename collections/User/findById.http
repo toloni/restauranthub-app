@@ -1,0 +1,11 @@
+@host = http://localhost:8080
+@id=972ee2d7-10ce-4107-96da-ffd036aec622
+
+### ✅ Find existing User
+GET {{host}}/api/v1/users/{{id}}
+
+### ❌ Find non-existent User (404 Not Found)
+GET {{host}}/api/v1/users/f4e509b4-ccf6-4559-80b8-805f0c05bc6f
+
+### ❌ Find with invalid UUID (400 Bad Request)
+GET {{host}}/api/v1/users/1

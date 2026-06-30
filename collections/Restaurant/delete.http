@@ -1,0 +1,46 @@
+@host=http://localhost:8080
+@restaurant_id_sem_menu_item=099b1f71-317e-4f90-81cc-2976d10f9fd6
+@owner_id=c835a1e5-dd1c-4404-a632-91604a9d4505
+@admin_id=c835a1e5-dd1c-4404-a632-91604a9d4505
+@restaurant_id_com_menu_item=1bc46c0b-e382-4c19-bc5b-1d3ce44206da
+
+### ✅ Delete Restaurant without associated MenuItems
+DELETE {{host}}/api/v1/restaurants/{{restaurant_id_sem_menu_item}}
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+
+
+### ✅ Delete Restaurant by Admin
+DELETE {{host}}/api/v1/restaurants/{{restaurant_id_com_menu_item}}
+X-User-Id: {{admin_id}}
+
+
+### ❌ Delete Restaurant with associated MenuItems (EntityInUseException)
+DELETE {{host}}/api/v1/restaurants/{{restaurant_id_com_menu_item}}
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+
+### ❌ Delete with X-User-Id different from owner (403 Forbidden)
+DELETE {{host}}/api/v1/restaurants/{{restaurant_id_com_menu_item}}
+Content-Type: application/json
+X-User-Id: 40f70b91-34eb-4129-9614-cff688f6eda9
+
+
+### ❌ Delete non-existent Restaurant (404 Not Found)
+DELETE {{host}}/api/v1/restaurants/40f70b91-34eb-4129-9614-cff688f6eda9
+Content-Type: application/json
+X-User-Id: 40f70b91-34eb-4129-9614-cff688f6eda9
+
+
+### ❌ Delete with invalid restaurant ID (Invalid UUID)
+DELETE {{host}}/api/v1/restaurants/40f70b91
+Content-Type: application/json
+X-User-Id: 40f70b91-34eb-4129-9614-cff688f6eda9
+
+
+### ❌ Delete with invalid X-User-Id format (Invalid UUID)
+DELETE {{host}}/api/v1/restaurants/40f70b91-34eb-4129-9614-cff688f6eda9
+Content-Type: application/json
+X-User-Id: 40f70b91

@@ -1,0 +1,242 @@
+@host = http://localhost:8080
+@owner_type_id=023174ba-0cd5-4b14-a482-ccdbcaa1b895
+@customer_type_id=54c7a111-55e1-47d1-a454-1d39d9e32bd1
+
+### ✅ Create valid User with RESTAURANT_OWNER
+POST {{host}}/api/v1/users
+Content-Type: application/json
+
+{
+  "name": "Alistair Cockburn",
+  "email": "alistair@mail.com",
+  "password": "password123",
+  "userTypeId": "{{owner_type_id}}"
+}
+
+### ✅ Create valid User with CUSTOMER
+POST {{host}}/api/v1/users
+Content-Type: application/json
+
+{
+  "name": "Bob Martin",
+  "email": "bob@mail.com",
+  "password": "password123",
+  "userTypeId": "{{customer_type_id}}"
+}
+
+### ❌ Create missing 'name'
+POST {{host}}/api/v1/users
+Content-Type: application/json
+
+{
+  "email": "steve@mail.com",
+  "password": "password123",
+  "userTypeId": "{{customer_type_id}}"
+}
+
+### ❌ Create missing 'email'
+POST {{host}}/api/v1/users
+Content-Type: application/json
+
+{
+  "name": "Steve Freeman",
+  "password": "password123",
+  "userTypeId": "{{customer_type_id}}"
+}
+
+### ❌ Create missing 'password'
+POST {{host}}/api/v1/users
+Content-Type: application/json
+
+{
+  "name": "Steve Freeman",
+  "email": "steve@mail.com",
+  "userTypeId": "{{customer_type_id}}"
+}
+
+### ❌ Create missing 'userTypeId'
+POST {{host}}/api/v1/users
+Content-Type: application/json
+
+{
+  "name": "Steve Freeman",
+  "email": "steve@mail.com",
+  "password": "password123"
+}
+
+### ❌ Create with invalid email format
+POST {{host}}/api/v1/users
+Content-Type: application/json
+
+{
+  "name": "Steve Freeman",
+  "email": "steve mail.com",
+  "password": "password123",
+  "userTypeId": "{{customer_type_id}}"
+}
+
+### ❌ Create with password under 8 characters
+POST {{host}}/api/v1/users
+Content-Type: application/json
+
+{
+  "name": "Steve Freeman",
+  "email": "bob@mail.com",
+  "password": "pass123",
+  "userTypeId": "{{customer_type_id}}"
+}
+
+### ❌ Create with duplicate email
+POST {{host}}/api/v1/users
+Content-Type: application/json
+
+{
+  "name": "Steve Freeman",
+  "email": "steve@mail.com",
+  "password": "password123",
+  "userTypeId": "{{customer_type_id}}"
+}
+
+### ❌ Create with non-existent userTypeId (404 Not Found)
+POST {{host}}/api/v1/users
+Content-Type: application/json
+
+{
+  "name": "Steve Freeman",
+  "email": "steve@mail.com",
+  "password": "password123",
+  "userTypeId": "b888eea7-fc79-4337-9e03-acbba1a594b6"
+}
+
+
+### ---------------------------
+### Seed Data / Bulk Insert
+### ---------------------------
+
+### User 1 - RESTAURANT_OWNER
+POST {{host}}/api/v1/users
+Content-Type: application/json
+
+{
+  "name": "Alistair Cockburn",
+  "email": "alistair@mail.com",
+  "password": "password123",
+  "userTypeId": "{{owner_type_id}}"
+}
+
+###
+
+### User 2 - RESTAURANT_OWNER
+POST {{host}}/api/v1/users
+Content-Type: application/json
+
+{
+  "name": "Robert Martin",
+  "email": "robert@mail.com",
+  "password": "password123",
+  "userTypeId": "6ac3b23e-0c14-428b-837b-d523e93635ca"
+}
+
+###
+
+### User 3 - RESTAURANT_OWNER
+POST {{host}}/api/v1/users
+Content-Type: application/json
+
+{
+  "name": "Kent Beck",
+  "email": "kent@mail.com",
+  "password": "password123",
+  "userTypeId": "{{owner_type_id}}"
+}
+
+###
+
+### User 4 - RESTAURANT_OWNER
+POST {{host}}/api/v1/users
+Content-Type: application/json
+
+{
+  "name": "Martin Fowler",
+  "email": "martin@mail.com",
+  "password": "password123",
+  "userTypeId": "{{owner_type_id}}"
+}
+
+###
+
+### User 5 - RESTAURANT_OWNER
+POST {{host}}/api/v1/users
+Content-Type: application/json
+
+{
+  "name": "Eric Evans",
+  "email": "eric@mail.com",
+  "password": "password123",
+  "userTypeId": "{{owner_type_id}}"
+}
+
+###
+
+### User 6 - CUSTOMER
+POST {{host}}/api/v1/users
+Content-Type: application/json
+
+{
+  "name": "Ward Cunningham",
+  "email": "ward@mail.com",
+  "password": "password123",
+  "userTypeId": "{{customer_type_id}}"
+}
+
+###
+
+### User 7 - CUSTOMER
+POST {{host}}/api/v1/users
+Content-Type: application/json
+
+{
+  "name": "Grady Booch",
+  "email": "grady@mail.com",
+  "password": "password123",
+  "userTypeId": "{{customer_type_id}}"
+}
+
+###
+
+### User 8 - CUSTOMER
+POST {{host}}/api/v1/users
+Content-Type: application/json
+
+{
+  "name": "James Gosling",
+  "email": "james@mail.com",
+  "password": "password123",
+  "userTypeId": "{{customer_type_id}}"
+}
+
+###
+
+### User 9 - CUSTOMER
+POST {{host}}/api/v1/users
+Content-Type: application/json
+
+{
+  "name": "Linus Torvalds",
+  "email": "linus@mail.com",
+  "password": "password123",
+  "userTypeId": "{{customer_type_id}}"
+}
+
+###
+
+### User 10 - CUSTOMER
+POST {{host}}/api/v1/users
+Content-Type: application/json
+
+{
+  "name": "Grace Hopper",
+  "email": "grace@mail.com",
+  "password": "password123",
+  "userTypeId": "{{customer_type_id}}"
+}

@@ -1,0 +1,87 @@
+@host = http://localhost:8080
+@user_id=aef7ec8d-04a6-4af8-bd3b-ab0b326ba40d
+@owner_id=f4e509b4-ccf6-4559-80b8-805f0c05bc6f
+@customer_id=e489def3-e082-46e0-9af2-158adefb031f
+
+### ✅ Update 'name'
+PATCH {{host}}/api/v1/users/{{user_id}}
+Content-Type: application/json
+
+{
+  "name": "Robert Martin"
+}
+
+### ✅ Update 'email'
+PATCH {{host}}/api/v1/users/{{user_id}}
+Content-Type: application/json
+
+{
+  "email": "robert@mail.com"
+}
+
+### ✅ Update 'password'
+PATCH {{host}}/api/v1/users/{{user_id}}
+Content-Type: application/json
+
+{
+  "password": "newpass123"
+}
+
+### ✅ Update 'userTypeId'
+PATCH {{host}}/api/v1/users/{{user_id}}
+Content-Type: application/json
+
+{
+  "userTypeId": "{{owner_id}}"
+}
+
+### ✅ Update all fields
+PATCH {{host}}/api/v1/users/{{user_id}}
+Content-Type: application/json
+
+{
+  "name": "Bob Martin",
+  "email": "bob@mail.com",
+  "password": "password123",
+  "userTypeId": "{{customer_id}}"
+}
+
+### ❌ Update with non-existent ID (404 Not Found)
+PATCH {{host}}/api/v1/users/e489def3-e082-46e0-9af2-158adefb031f
+Content-Type: application/json
+
+{
+  "name": "Uncle Bob"
+}
+
+### ❌ Update with duplicate 'email' from another User
+PATCH {{host}}/api/v1/users/{{user_id}}
+Content-Type: application/json
+
+{
+  "email": "alistair@mail.com"
+}
+
+### ❌ Update with invalid email format
+PATCH {{host}}/api/v1/users/{{user_id}}
+Content-Type: application/json
+
+{
+  "email": "alistair@mailcom"
+}
+
+### ❌ Update with password under 8 characters
+PATCH {{host}}/api/v1/users/{{user_id}}
+Content-Type: application/json
+
+{
+  "password": "new123"
+}
+
+### ❌ Update with non-existent userTypeId (404 Not Found)
+PATCH {{host}}/api/v1/users/{{user_id}}
+Content-Type: application/json
+
+{
+  "userTypeId": "86d4fa53-3767-4e6d-87f3-a06ac9cea5bf"
+}

@@ -1,0 +1,49 @@
+@host=http://localhost:8080
+
+### ✅ List without parameters (page 0, size 10)
+GET {{host}}/api/v1/restaurants
+
+### ✅ List with pagination (page=1&size=5)
+GET {{host}}/api/v1/restaurants
+    ?page=1
+    &size=5
+
+### ✅ List with DESC sorting by name
+GET {{host}}/api/v1/restaurants
+    ?sort=name
+    &direction=DESC
+
+### ✅ List with ASC sorting by name
+GET {{host}}/api/v1/restaurants
+    ?sort=name
+    &direction=ASC
+
+### ✅ List with ASC sorting by cuisineType
+GET {{host}}/api/v1/restaurants
+    ?sort=cuisineType
+    &direction=ASC
+
+### ✅ Filter by existing name
+GET {{host}}/api/v1/restaurants
+    ?filter=name
+    &filterValue=Burger
+
+### ✅ Filter by existing cuisineType
+GET {{host}}/api/v1/restaurants
+    ?filter=cuisineType
+    &filterValue=Brazilian
+
+### ✅ Filter by non-existent name (returns empty list)
+GET {{host}}/api/v1/restaurants
+    ?filter=name
+    &filterValue=NonExistentRestaurant
+
+### ❌ Filter by invalid field (400 Bad Request)
+GET {{host}}/api/v1/restaurants
+    ?filter=nome
+    &filterValue=Burger
+
+### ❌ Sort by invalid field (400 Bad Request)
+GET {{host}}/api/v1/restaurants
+    ?sort=nome
+    &direction=ASC

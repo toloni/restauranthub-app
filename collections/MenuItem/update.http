@@ -1,0 +1,136 @@
+@host=http://localhost:8080
+@menuitem_id=3a3e3536-8539-4012-a2e2-1eab01e29391
+@owner_id=c60959dc-5bf9-447a-9ea2-a2cd2b6bb92b
+
+### ✅ Update 'name'
+PATCH {{host}}/api/v1/menu-items/{{menuitem_id}}
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+{
+  "name": "Super Burger"
+}
+
+### ✅ Update 'description'
+PATCH {{host}}/api/v1/menu-items/{{menuitem_id}}
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+{
+  "description": "beef patty with crispy"
+}
+
+### ✅ Update 'price'
+PATCH {{host}}/api/v1/menu-items/{{menuitem_id}}
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+{
+  "price": 30.00,
+  "currency": "BRL"
+}
+
+### ✅ Update 'dineInOnly'
+PATCH {{host}}/api/v1/menu-items/{{menuitem_id}}
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+{
+  "dineInOnly": true
+}
+
+### ✅ Update 'imagePath'
+PATCH {{host}}/api/v1/menu-items/{{menuitem_id}}
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+{
+  "imagePath": "/images/super-burger.jpg"
+}
+
+### ✅ Update all fields
+PATCH {{host}}/api/v1/menu-items/{{menuitem_id}}
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+{
+  "name": "The Great Burger",
+  "description": "Double beef patty with crispy bacon and cheddar cheese",
+  "price": 24.90,
+  "currency": "BRL",
+  "dineInOnly": false,
+  "imagePath": "/images/bacon-burger.jpg",
+  "restaurantId": "972ee2d7-10ce-4107-96da-ffd036aec622"
+}
+
+### ❌ Update with non-existent ID (404 Not Found)
+PATCH {{host}}/api/v1/menu-items/972ee2d7-10ce-4107-96da-ffd036aec622
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+{
+  "name": "Super Burger"
+}
+
+### ❌ Update with duplicate 'name' in the same restaurant
+PATCH {{host}}/api/v1/menu-items/{{menuitem_id}}
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+{
+  "name": "Classic Burger"
+}
+
+### ✅ Update with duplicate 'name' in a different restaurant
+PATCH {{host}}/api/v1/menu-items/c81e47a5-e285-4463-958d-e2264ac5491f
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+{
+  "name": "The Great Burger"
+}
+
+### ❌ Update with negative price
+PATCH {{host}}/api/v1/menu-items/{{menuitem_id}}
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+{
+  "price": -30.00,
+  "currency": "BRL"
+}
+
+### ❌ Update with X-User-Id different from owner (403 Forbidden)
+PATCH {{host}}/api/v1/menu-items/{{menuitem_id}}
+Content-Type: application/json
+X-User-Id: 3a3e3536-8539-4012-a2e2-1eab01e29391
+
+{
+  "name": "Super Burger"
+}
+
+### ❌ Update missing 'X-User-Id' header (400 Bad Request)
+PATCH {{host}}/api/v1/menu-items/{{menuitem_id}}
+Content-Type: application/json
+
+{
+  "name": "Super Burger"
+}
+
+### ❌ Update with invalid 'X-User-Id' format (Invalid UUID)
+PATCH {{host}}/api/v1/menu-items/{{menuitem_id}}
+Content-Type: application/json
+X-User-Id: 123
+
+{
+  "name": "Super Burger"
+}
+
+### ❌ Update with invalid menu item ID (Invalid UUID)
+PATCH {{host}}/api/v1/menu-items/123
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+{
+  "name": "Super Burger"
+}

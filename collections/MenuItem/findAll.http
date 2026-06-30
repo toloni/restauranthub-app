@@ -1,0 +1,50 @@
+@host=http://localhost:8080
+@restaurant_id=972ee2d7-10ce-4107-96da-ffd036aec622
+
+### ✅ List without parameters (page 0, size 10)
+GET {{host}}/api/v1/menu-items
+
+### ✅ List with pagination (page=1&size=5)
+GET {{host}}/api/v1/menu-items
+    ?page=1
+    &size=5
+
+### ✅ List with ASC sorting by name
+GET {{host}}/api/v1/menu-items
+    ?sort=name
+    &direction=ASC
+
+### ✅ List with DESC sorting by name
+GET {{host}}/api/v1/menu-items
+    ?sort=name
+    &direction=DESC
+
+### ✅ List with ASC sorting by price
+GET {{host}}/api/v1/menu-items
+    ?sort=price
+    &direction=ASC
+
+### ✅ Filter by existing restaurantId
+GET {{host}}/api/v1/menu-items
+    ?filter=restaurantId
+    &filterValue=1bc46c0b-e382-4c19-bc5b-1d3ce44206da
+
+### ✅ Filter by existing name
+GET {{host}}/api/v1/menu-items
+    ?filter=name
+    &filterValue=Burger
+
+### ✅ Filter by non-existent name (returns empty list)
+GET {{host}}/api/v1/menu-items
+    ?filter=name
+    &filterValue=Pasta
+
+### ❌ Filter by invalid field (400 Bad Request)
+GET {{host}}/api/v1/menu-items
+    ?filter=rating
+    &filterValue=5
+
+### ❌ Sort by invalid field (400 Bad Request)
+GET {{host}}/api/v1/menu-items
+    ?sort=rating
+    &direction=ASC

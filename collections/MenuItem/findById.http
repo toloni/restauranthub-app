@@ -1,0 +1,11 @@
+@host=http://localhost:8080
+@menu_item_id=3a3e3536-8539-4012-a2e2-1eab01e29391
+
+### ✅ Find existing MenuItem (returns restaurantName)
+GET {{host}}/api/v1/menu-items/{{menu_item_id}}
+
+### ❌ Find non-existent MenuItem (404 Not Found)
+GET {{host}}/api/v1/menu-items/972ee2d7-10ce-4107-96da-ffd036aec622
+
+### ❌ Find with invalid UUID (400 Bad Request)
+GET {{host}}/api/v1/menu-items/123

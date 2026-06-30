@@ -1,0 +1,39 @@
+@host = http://localhost:8080
+
+### ✅ List without parameters (page 0, size 10)
+GET {{host}}/api/v1/users
+
+### ✅ List with pagination (page=0&size=5)
+GET {{host}}/api/v1/users
+    ?page=0
+    &size=5
+
+### ✅ List with ASC sorting by name
+GET {{host}}/api/v1/users
+    ?sort=name
+    &direction=ASC
+
+### ✅ List with DESC sorting by name
+GET {{host}}/api/v1/users
+    ?sort=name
+    &direction=DESC
+
+### ✅ Filter by existing name
+GET {{host}}/api/v1/users
+    ?filter=name
+    &filterValue=bob
+
+### ✅ Filter by existing email
+GET {{host}}/api/v1/users
+    ?filter=email
+    &filterValue=bob
+
+### ✅ Filter by existing userTypeId
+GET {{host}}/api/v1/users
+    ?filter=userTypeId
+    &filterValue=e489def3-e082-46e0-9af2-158adefb031f
+
+### ❌ Filter by invalid field (returns 400 Bad Request)
+GET {{host}}/api/v1/users
+    ?filter=userId
+    &filterValue=e489def3-e082-46e0-9af2-158adefb031f

@@ -1,0 +1,728 @@
+{
+  "info": {
+    "_postman_id": "6d118cf4-1440-4163-9242-9cb5ac43f8d9",
+    "name": "RestaurantHub API (Fase 2)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "6710585"
+  },
+  "item": [
+    {
+      "name": "USER-TYPE",
+      "item": [
+        {
+          "name": "get-all-usertype",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// 1. Converter a resposta da API em formato JSON",
+                  "const responseData = pm.response.json();",
+                  "",
+                  "// 2. Procurar o objeto que tem a role \"RESTAURANT_OWNER\"",
+                  "const ownerType = responseData.content.find(item => item.role === \"RESTAURANT_OWNER\");",
+                  "",
+                  "// 3. Procurar o objeto que tem a role \"CUSTOMER\"",
+                  "const customerType = responseData.content.find(item => item.role === \"CUSTOMER\");",
+                  "",
+                  "// 4. Salvar os IDs encontrados nas variáveis de ambiente da Collection",
+                  "if (ownerType) {",
+                  "    pm.collectionVariables.set(\"userTypeOwnerId\", ownerType.id);",
+                  "    console.log(\"userTypeOwnerId definido para: \" + ownerType.id);",
+                  "}",
+                  "",
+                  "if (customerType) {",
+                  "    pm.collectionVariables.set(\"userTypeCustomerId\", customerType.id);",
+                  "    console.log(\"userTypeCustomerId definido para: \" + customerType.id);",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/api/v1/user-types",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "user-types"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get-usertype-by-id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/api/v1/user-types/{{userTypeCustomerId}}",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "user-types",
+                "{{userTypeCustomerId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "create-usertype",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Customer\",\n    \"description\": \"User who can browse restaurants and place orders.\",\n    \"role\": \"CUSTOMER\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/api/v1/user-types",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "user-types"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update-usertype",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Customer\",\n    \"description\": \"User who can browse restaurants and place orders.\",\n    \"role\": \"CUSTOMER\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/api/v1/user-types/{{userTypeCustomerId}}",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "user-types",
+                "{{userTypeCustomerId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete-usertype",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/api/v1/user-types/{{userTypeCustomerId}}",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "user-types",
+                "{{userTypeCustomerId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "USER",
+      "item": [
+        {
+          "name": "get-all-users",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// 1. Converter a resposta da API em formato JSON",
+                  "const responseData = pm.response.json();",
+                  "",
+                  "// 2. Procurar o objeto que tem a role \"RESTAURANT_OWNER\"",
+                  "const ownerType = responseData.content.find(item => item.role === \"RESTAURANT_OWNER\");",
+                  "",
+                  "// 3. Procurar o objeto que tem a role \"CUSTOMER\"",
+                  "const customerType = responseData.content.find(item => item.role === \"CUSTOMER\");",
+                  "",
+                  "// 4. Salvar os IDs encontrados nas variáveis de ambiente da Collection",
+                  "if (ownerType) {",
+                  "    pm.collectionVariables.set(\"userTypeOwnerId\", ownerType.id);",
+                  "    console.log(\"userTypeOwnerId definido para: \" + ownerType.id);",
+                  "}",
+                  "",
+                  "if (customerType) {",
+                  "    pm.collectionVariables.set(\"userTypeCustomerId\", customerType.id);",
+                  "    console.log(\"userTypeCustomerId definido para: \" + customerType.id);",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/api/v1/users",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get-user-by-id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/api/v1/users/40f70b91-34eb-4129-9614-cff688f6eda9",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "users",
+                "40f70b91-34eb-4129-9614-cff688f6eda9"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "create-user",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Ward Cunningham\",\n    \"email\": \"ward@mail.com\",\n    \"userTypeId\": \"e489def3-e082-46e0-9af2-158adefb031f\",\n    \"userTypeName\": \"Customer\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/api/v1/users",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update-user",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Ward Cunningham\",\n    \"email\": \"ward@mail.com\",\n    \"userTypeId\": \"e489def3-e082-46e0-9af2-158adefb031f\",\n    \"userTypeName\": \"Customer\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/api/v1/users/40f70b91-34eb-4129-9614-cff688f6eda9",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "users",
+                "40f70b91-34eb-4129-9614-cff688f6eda9"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete-user",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/api/v1/users/40f70b91-34eb-4129-9614-cff688f6eda9",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "users",
+                "40f70b91-34eb-4129-9614-cff688f6eda9"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "RESTAURANT",
+      "item": [
+        {
+          "name": "get-all-restaurants",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// 1. Converter a resposta da API em formato JSON",
+                  "const responseData = pm.response.json();",
+                  "",
+                  "// 2. Procurar o objeto que tem a role \"RESTAURANT_OWNER\"",
+                  "const ownerType = responseData.content.find(item => item.role === \"RESTAURANT_OWNER\");",
+                  "",
+                  "// 3. Procurar o objeto que tem a role \"CUSTOMER\"",
+                  "const customerType = responseData.content.find(item => item.role === \"CUSTOMER\");",
+                  "",
+                  "// 4. Salvar os IDs encontrados nas variáveis de ambiente da Collection",
+                  "if (ownerType) {",
+                  "    pm.collectionVariables.set(\"userTypeOwnerId\", ownerType.id);",
+                  "    console.log(\"userTypeOwnerId definido para: \" + ownerType.id);",
+                  "}",
+                  "",
+                  "if (customerType) {",
+                  "    pm.collectionVariables.set(\"userTypeCustomerId\", customerType.id);",
+                  "    console.log(\"userTypeCustomerId definido para: \" + customerType.id);",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/api/v1/restaurants",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "restaurants"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get-restaurant-by-id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/api/v1/restaurants/972ee2d7-10ce-4107-96da-ffd036aec622",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "restaurants",
+                "972ee2d7-10ce-4107-96da-ffd036aec622"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "create-restaurant",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-User-Id",
+                "value": "bf954845-9653-405a-9e3d-fbf1a1801b8f",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Bistro Paris\",\n    \"address\": \"321 Rue de Paris, Miami\",\n    \"cuisineType\": \"French\",\n    \"openingHours\": \"Wed-Mon 6pm-midnight\",\n    \"ownerId\": \"c60959dc-5bf9-447a-9ea2-a2cd2b6bb92b\",\n    \"ownerName\": \"Alistair Cockburn\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/api/v1/restaurants",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "restaurants"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update-restaurant",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "X-User-Id",
+                "value": "bf954845-9653-405a-9e3d-fbf1a1801b8f",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Bistro Paris\",\n    \"address\": \"321 Rue de Paris, Miami\",\n    \"cuisineType\": \"French\",\n    \"openingHours\": \"Wed-Mon 6pm-midnight\",\n    \"ownerId\": \"c60959dc-5bf9-447a-9ea2-a2cd2b6bb92b\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/api/v1/restaurants/b1e24bcf-7cb4-4ac1-bff6-a5224ddcb06f",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "restaurants",
+                "b1e24bcf-7cb4-4ac1-bff6-a5224ddcb06f"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete-restaurant",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "X-User-Id",
+                "value": "bf954845-9653-405a-9e3d-fbf1a1801b8f",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{host}}/api/v1/restaurants/40f70b91-34eb-4129-9614-cff688f6eda9",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "restaurants",
+                "40f70b91-34eb-4129-9614-cff688f6eda9"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "transfer-ownership",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "X-User-Id",
+                "value": "6ddc48d7-844c-45ef-81a8-9035c135e87f",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"newOwnerId\": \"9b097b88-74d3-4f38-9c53-83c8c98ac297\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/api/v1/restaurants/9b097b88-74d3-4f38-9c53-83c8c98ac297/transfer-ownership",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "restaurants",
+                "9b097b88-74d3-4f38-9c53-83c8c98ac297",
+                "transfer-ownership"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "MENU-ITEM",
+      "item": [
+        {
+          "name": "get-all-menu-items",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// 1. Converter a resposta da API em formato JSON",
+                  "const responseData = pm.response.json();",
+                  "",
+                  "// 2. Procurar o objeto que tem a role \"RESTAURANT_OWNER\"",
+                  "const ownerType = responseData.content.find(item => item.role === \"RESTAURANT_OWNER\");",
+                  "",
+                  "// 3. Procurar o objeto que tem a role \"CUSTOMER\"",
+                  "const customerType = responseData.content.find(item => item.role === \"CUSTOMER\");",
+                  "",
+                  "// 4. Salvar os IDs encontrados nas variáveis de ambiente da Collection",
+                  "if (ownerType) {",
+                  "    pm.collectionVariables.set(\"userTypeOwnerId\", ownerType.id);",
+                  "    console.log(\"userTypeOwnerId definido para: \" + ownerType.id);",
+                  "}",
+                  "",
+                  "if (customerType) {",
+                  "    pm.collectionVariables.set(\"userTypeCustomerId\", customerType.id);",
+                  "    console.log(\"userTypeCustomerId definido para: \" + customerType.id);",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/api/v1/menu-items",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "menu-items"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get-menu-item-by-id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/api/v1/menu-items/70824a5b-6b48-4bf7-99e8-2e56c8ee06a0",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "menu-items",
+                "70824a5b-6b48-4bf7-99e8-2e56c8ee06a0"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "create-menu-item",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-User-Id",
+                "value": "c60959dc-5bf9-447a-9ea2-a2cd2b6bb92b",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"The Superior Burger\",\n    \"description\": \"Double beef patty with crispy bacon and cheddar cheese\",\n    \"price\": 24.90,\n    \"currency\": \"BRL\",\n    \"dineInOnly\": false,\n    \"imagePath\": \"/images/bacon-burger.jpg\",\n    \"restaurantId\": \"972ee2d7-10ce-4107-96da-ffd036aec622\",\n    \"restaurantName\": \"The Great Burger\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/api/v1/menu-items",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "menu-items"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update-menu-item",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "X-User-Id",
+                "value": "c60959dc-5bf9-447a-9ea2-a2cd2b6bb92b",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"The Big Burger\",\n    \"description\": \"Double beef patty with crispy bacon and cheddar cheese\",\n    \"price\": 24.90,\n    \"currency\": \"BRL\",\n    \"dineInOnly\": false,\n    \"imagePath\": \"/images/bacon-burger.jpg\",\n    \"restaurantId\": \"972ee2d7-10ce-4107-96da-ffd036aec622\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/api/v1/menu-items/70824a5b-6b48-4bf7-99e8-2e56c8ee06a0",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "menu-items",
+                "70824a5b-6b48-4bf7-99e8-2e56c8ee06a0"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete-menu-item",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "X-User-Id",
+                "value": "c60959dc-5bf9-447a-9ea2-a2cd2b6bb92b",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{host}}/api/v1/menu-items/70824a5b-6b48-4bf7-99e8-2e56c8ee06a0",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "menu-items",
+                "70824a5b-6b48-4bf7-99e8-2e56c8ee06a0"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "host",
+      "value": ""
+    },
+    {
+      "key": "userTypeOwnerId",
+      "value": ""
+    },
+    {
+      "key": "userTypeCustomerId",
+      "value": ""
+    }
+  ]
+}

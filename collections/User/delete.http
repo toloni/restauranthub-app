@@ -1,0 +1,12 @@
+@host = http://localhost:8080
+@user_id_with_no_restaurants=86d4fa53-3767-4e6d-87f3-a06ac9cea5bf
+@user_id_with_restaurants=86d4fa53-3767-4e6d-87f3-a06ac9cea5bf
+
+### ✅ Delete User without associated restaurants
+DELETE {{host}}/api/v1/users/{{user_id_with_no_restaurants}}
+
+### ❌ Delete User with associated restaurants (EntityInUseException)
+DELETE {{host}}/api/v1/users/{{user_id_with_restaurants}}
+
+### ❌ Delete non-existent User (idempotent — should return 204)
+DELETE {{host}}/api/v1/users/86d4fa53-3767-4e6d-87f3-a06ac9cea5bf

@@ -1,0 +1,105 @@
+@host=http://localhost:8080
+@owner_id=c60959dc-5bf9-447a-9ea2-a2cd2b6bb92b
+@restaurant_id=08b19dda-4932-46ac-b19c-6c4ffe8f8767
+
+### ✅ Update 'name'
+PATCH {{host}}/api/v1/restaurants/{{restaurant_id}}
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+{
+  "name": "Bistro"
+}
+
+### ✅ Update 'address'
+PATCH {{host}}/api/v1/restaurants/{{restaurant_id}}
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+{
+  "address": "3 Rue de Paris, Orlando"
+}
+
+### ✅ Update 'cuisineType'
+PATCH {{host}}/api/v1/restaurants/{{restaurant_id}}
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+{
+  "cuisineType": "American"
+}
+
+### ✅ Update 'openingHours'
+PATCH {{host}}/api/v1/restaurants/{{restaurant_id}}
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+{
+  "openingHours": "Wed-Mon 6am-6pm"
+}
+
+### ✅ Update all fields
+PATCH {{host}}/api/v1/restaurants/{{restaurant_id}}
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+{
+  "name": "Le Petit Bistro",
+  "address": "321 Rue de Paris, Miami",
+  "cuisineType": "French",
+  "openingHours": "Wed-Mon 6pm-midnight"
+}
+
+### ❌ Update with non-existent ID (404 Not Found)
+PATCH {{host}}/api/v1/restaurants/c60959dc-5bf9-447a-9ea2-a2cd2b6bb92b
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+{
+  "name": "Bistro"
+}
+
+### ❌ Update with duplicate 'name' from another Restaurant
+PATCH {{host}}/api/v1/restaurants/{{restaurant_id}}
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+{
+  "name": "Sakura Sushi"
+}
+
+### ❌ Update with X-User-Id different from owner (403 Forbidden)
+PATCH {{host}}/api/v1/restaurants/{{restaurant_id}}
+Content-Type: application/json
+X-User-Id: 62d8337f-c08b-4dcf-ab47-4ba3a35e1fc6
+
+{
+  "name": "Bistro"
+}
+
+### ❌ Update with non-existent X-User-Id (403 Forbidden / 401 Unauthorized)
+PATCH {{host}}/api/v1/restaurants/{{restaurant_id}}
+Content-Type: application/json
+X-User-Id: f4e509b4-ccf6-4559-80b8-805f0c05bc6f
+
+{
+  "name": "Bistro"
+}
+
+### ❌ Update with invalid X-User-Id format (Invalid UUID)
+PATCH {{host}}/api/v1/restaurants/{{restaurant_id}}
+Content-Type: application/json
+X-User-Id: 123
+
+{
+  "name": "Bistro"
+}
+
+### ❌ Update with invalid restaurant ID (Invalid UUID)
+PATCH {{host}}/api/v1/restaurants/123
+Content-Type: application/json
+X-User-Id: {{owner_id}}
+
+{
+  "name": "Bistro"
+}
