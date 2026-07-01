@@ -50,7 +50,7 @@ public class CreateUserUseCase {
     /// @param name       the name of the created user
     /// @param email      the email of the created user
     /// @param userTypeId the [UserTypeId] of the created user
-    public record Output(UserId id, String name, String email, UserTypeId userTypeId) {
+    public record Output(UserId id, UserName name, UserEmail email, UserTypeId userTypeId) {
     }
 
     /// Executes the use case with the given input.
@@ -82,8 +82,8 @@ public class CreateUserUseCase {
 
         return new Output(
                 saved.getId(),
-                saved.getName().getValue(),
-                saved.getEmail().getValue(),
+                saved.getName(),
+                saved.getEmail(),
                 saved.getUserTypeId()
         );
     }

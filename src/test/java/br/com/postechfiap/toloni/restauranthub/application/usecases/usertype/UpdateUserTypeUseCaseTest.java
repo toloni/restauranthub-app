@@ -117,8 +117,8 @@ class UpdateUserTypeUseCaseTest {
 
         var output = useCase.execute(input);
 
-        assertThat(output.name()).isEqualTo("Customer");
-        assertThat(output.description()).isEqualTo("Browses and orders food");
+        assertThat(output.name().getValue()).isEqualTo("Customer");
+        assertThat(output.description().getValue()).isEqualTo("Browses and orders food");
         assertThat(output.role()).isEqualTo(UserRole.CUSTOMER);
     }
 
@@ -165,8 +165,8 @@ class UpdateUserTypeUseCaseTest {
         var output = useCase.execute(input);
 
         assertThat(output.id()).isEqualTo(id);
-        assertThat(output.name()).isEqualTo("New Name");
-        assertThat(output.description()).isEqualTo("New Description");
+        assertThat(output.name().getValue()).isEqualTo("New Name");
+        assertThat(output.description().getValue()).isEqualTo("New Description");
         assertThat(output.role()).isEqualTo(UserRole.RESTAURANT_OWNER);
     }
 

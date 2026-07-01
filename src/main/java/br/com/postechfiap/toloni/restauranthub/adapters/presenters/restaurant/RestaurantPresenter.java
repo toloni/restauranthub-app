@@ -47,10 +47,10 @@ public class RestaurantPresenter {
     public RestaurantViewModel present(FindRestaurantByIdUseCase.Output output) {
         return new RestaurantViewModel(
                 output.id().getValue(),
-                output.name(),
-                output.address(),
-                output.cuisineType(),
-                output.openingHours(),
+                output.name().getValue(),
+                output.address().getValue(),
+                output.cuisineType().getValue(),
+                output.openingHours().getValue(),
                 output.ownerId().getValue(),
                 output.ownerName()
         );
@@ -63,10 +63,10 @@ public class RestaurantPresenter {
     public RestaurantViewModel present(FindAllRestaurantsUseCase.Output output) {
         return new RestaurantViewModel(
                 output.id().getValue(),
-                output.name(),
-                output.address(),
-                output.cuisineType(),
-                output.openingHours(),
+                output.name().getValue(),
+                output.address().getValue(),
+                output.cuisineType().getValue(),
+                output.openingHours().getValue(),
                 output.ownerId().getValue(),
                 output.ownerName()
         );

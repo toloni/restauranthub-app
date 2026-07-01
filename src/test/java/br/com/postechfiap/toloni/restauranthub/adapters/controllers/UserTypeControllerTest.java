@@ -6,7 +6,9 @@ import br.com.postechfiap.toloni.restauranthub.application.pagination.Page;
 import br.com.postechfiap.toloni.restauranthub.application.pagination.PageRequest;
 import br.com.postechfiap.toloni.restauranthub.application.usecases.usertype.*;
 import br.com.postechfiap.toloni.restauranthub.domain.usertype.UserRole;
+import br.com.postechfiap.toloni.restauranthub.domain.usertype.valueobject.UserTypeDescription;
 import br.com.postechfiap.toloni.restauranthub.domain.usertype.valueobject.UserTypeId;
+import br.com.postechfiap.toloni.restauranthub.domain.usertype.valueobject.UserTypeName;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -61,7 +63,7 @@ class UserTypeControllerTest {
     @DisplayName("Should delegate create to CreateUserTypeUseCase and present result")
     void shouldDelegateCreateToCreateUserTypeUseCase() {
         var input = new CreateUserTypeUseCase.Input("Restaurant Owner", "Owns and manages a restaurant", UserRole.RESTAURANT_OWNER);
-        var output = new CreateUserTypeUseCase.Output(id, "Restaurant Owner", "Owns and manages a restaurant", UserRole.RESTAURANT_OWNER);
+        var output = new CreateUserTypeUseCase.Output(id, UserTypeName.of("Restaurant Owner"), UserTypeDescription.of("Owns and manages a restaurant"), UserRole.RESTAURANT_OWNER);
         var viewModel = new UserTypeViewModel(id.getValue(), "Restaurant Owner", "Owns and manages a restaurant", UserRole.RESTAURANT_OWNER);
 
         when(createUserTypeUseCase.execute(input)).thenReturn(output);
@@ -82,7 +84,7 @@ class UserTypeControllerTest {
     @DisplayName("Should delegate update to UpdateUserTypeUseCase and present result")
     void shouldDelegateUpdateToUpdateUserTypeUseCase() {
         var input = new UpdateUserTypeUseCase.Input(id, "New Name", null, null);
-        var output = new UpdateUserTypeUseCase.Output(id, "New Name", "Owns and manages a restaurant", UserRole.RESTAURANT_OWNER);
+        var output = new UpdateUserTypeUseCase.Output(id, UserTypeName.of("New Name"), UserTypeDescription.of("Owns and manages a restaurant"), UserRole.RESTAURANT_OWNER);
         var viewModel = new UserTypeViewModel(id.getValue(), "New Name", "Owns and manages a restaurant", UserRole.RESTAURANT_OWNER);
 
         when(updateUserTypeUseCase.execute(input)).thenReturn(output);
@@ -119,7 +121,7 @@ class UserTypeControllerTest {
     @DisplayName("Should delegate findById to FindUserTypeByIdUseCase and present result")
     void shouldDelegateFindByIdToFindUserTypeByIdUseCase() {
         var input = new FindUserTypeByIdUseCase.Input(id);
-        var output = new FindUserTypeByIdUseCase.Output(id, "Restaurant Owner", "Owns and manages a restaurant", UserRole.RESTAURANT_OWNER);
+        var output = new FindUserTypeByIdUseCase.Output(id, UserTypeName.of("Restaurant Owner"), UserTypeDescription.of("Owns and manages a restaurant"), UserRole.RESTAURANT_OWNER);
         var viewModel = new UserTypeViewModel(id.getValue(), "Restaurant Owner", "Owns and manages a restaurant", UserRole.RESTAURANT_OWNER);
 
         when(findUserTypeByIdUseCase.execute(input)).thenReturn(output);
@@ -141,7 +143,7 @@ class UserTypeControllerTest {
     void shouldDelegateFindAllToFindAllUserTypesUseCase() {
         var pageRequest = PageRequest.of(0, 10);
         var input = new FindAllUserTypesUseCase.Input(pageRequest);
-        var output = new FindAllUserTypesUseCase.Output(id, "Restaurant Owner", "Owns and manages a restaurant", UserRole.RESTAURANT_OWNER);
+        var output = new FindAllUserTypesUseCase.Output(id, UserTypeName.of("Restaurant Owner"), UserTypeDescription.of("Owns and manages a restaurant"), UserRole.RESTAURANT_OWNER);
         var viewModel = new UserTypeViewModel(id.getValue(), "Restaurant Owner", "Owns and manages a restaurant", UserRole.RESTAURANT_OWNER);
         var useCasePage = Page.of(List.of(output), 0, 10, 1L);
         var expectedPage = Page.of(List.of(viewModel), 0, 10, 1L);

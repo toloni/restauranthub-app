@@ -3,7 +3,9 @@ package br.com.postechfiap.toloni.restauranthub.application.usecases.user;
 import br.com.postechfiap.toloni.restauranthub.application.gateways.UserGateway;
 import br.com.postechfiap.toloni.restauranthub.application.pagination.Page;
 import br.com.postechfiap.toloni.restauranthub.application.pagination.PageRequest;
+import br.com.postechfiap.toloni.restauranthub.domain.user.valueobject.UserEmail;
 import br.com.postechfiap.toloni.restauranthub.domain.user.valueobject.UserId;
+import br.com.postechfiap.toloni.restauranthub.domain.user.valueobject.UserName;
 import br.com.postechfiap.toloni.restauranthub.domain.usertype.valueobject.UserTypeId;
 
 /// Use case responsible for retrieving a paginated list of [User] instances.
@@ -33,7 +35,7 @@ public class FindAllUsersUseCase {
     /// @param name       the name of the user
     /// @param email      the email of the user
     /// @param userTypeId the [UserTypeId] of the user
-    public record Output(UserId id, String name, String email, UserTypeId userTypeId, String userTypeName) {
+    public record Output(UserId id, UserName name, UserEmail email, UserTypeId userTypeId, String userTypeName) {
     }
 
 
@@ -48,8 +50,8 @@ public class FindAllUsersUseCase {
                 .stream()
                 .map(enriched -> new Output(
                         enriched.user().getId(),
-                        enriched.user().getName().getValue(),
-                        enriched.user().getEmail().getValue(),
+                        enriched.user().getName(),
+                        enriched.user().getEmail(),
                         enriched.user().getUserTypeId(),
                         enriched.userTypeName()
                 ))

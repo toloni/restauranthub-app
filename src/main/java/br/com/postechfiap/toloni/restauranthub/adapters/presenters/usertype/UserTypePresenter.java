@@ -18,8 +18,8 @@ public class UserTypePresenter {
     public UserTypeViewModel present(CreateUserTypeUseCase.Output output) {
         return new UserTypeViewModel(
                 output.id().getValue(),
-                output.name(),
-                output.description(),
+                output.name().getValue(),
+                output.description().getValue(),
                 output.role()
         );
     }
@@ -31,8 +31,8 @@ public class UserTypePresenter {
     public UserTypeViewModel present(UpdateUserTypeUseCase.Output output) {
         return new UserTypeViewModel(
                 output.id().getValue(),
-                output.name(),
-                output.description(),
+                output.name().getValue(),
+                output.description().getValue(),
                 output.role()
         );
     }
@@ -44,8 +44,8 @@ public class UserTypePresenter {
     public UserTypeViewModel present(FindUserTypeByIdUseCase.Output output) {
         return new UserTypeViewModel(
                 output.id().getValue(),
-                output.name(),
-                output.description(),
+                output.name().getValue(),
+                output.description().getValue(),
                 output.role()
         );
     }
@@ -57,8 +57,8 @@ public class UserTypePresenter {
     public UserTypeViewModel present(FindAllUserTypesUseCase.Output output) {
         return new UserTypeViewModel(
                 output.id().getValue(),
-                output.name(),
-                output.description(),
+                output.name().getValue(),
+                output.description().getValue(),
                 output.role()
         );
     }

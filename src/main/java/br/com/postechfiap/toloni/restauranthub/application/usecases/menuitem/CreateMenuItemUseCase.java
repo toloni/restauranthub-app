@@ -71,8 +71,8 @@ public class CreateMenuItemUseCase {
     /// @param dineInOnly   whether this item is available for dine-in only
     /// @param imagePath    the image path of the created menu item
     /// @param restaurantId the [RestaurantId] of the restaurant this item belongs to
-    public record Output(MenuItemId id, String name, String description, BigDecimal price,
-                         Currency currency, boolean dineInOnly, String imagePath, RestaurantId restaurantId) {
+    public record Output(MenuItemId id, MenuItemName name, MenuItemDescription description, MenuItemPrice price,
+                         boolean dineInOnly, MenuItemImagePath imagePath, RestaurantId restaurantId) {
     }
 
     /// Executes the use case with the given input.
@@ -111,12 +111,11 @@ public class CreateMenuItemUseCase {
     private Output toOutput(MenuItem menuItem) {
         return new Output(
                 menuItem.getId(),
-                menuItem.getName().getValue(),
-                menuItem.getDescription().getValue(),
-                menuItem.getPrice().getAmount(),
-                menuItem.getPrice().getCurrency(),
+                menuItem.getName(),
+                menuItem.getDescription(),
+                menuItem.getPrice(),
                 menuItem.isDineInOnly(),
-                menuItem.getImagePath().getValue(),
+                menuItem.getImagePath(),
                 menuItem.getRestaurantId()
         );
     }

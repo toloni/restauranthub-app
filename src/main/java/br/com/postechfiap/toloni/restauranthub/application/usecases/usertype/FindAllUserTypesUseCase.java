@@ -4,7 +4,9 @@ import br.com.postechfiap.toloni.restauranthub.application.gateways.UserTypeGate
 import br.com.postechfiap.toloni.restauranthub.application.pagination.Page;
 import br.com.postechfiap.toloni.restauranthub.application.pagination.PageRequest;
 import br.com.postechfiap.toloni.restauranthub.domain.usertype.UserRole;
+import br.com.postechfiap.toloni.restauranthub.domain.usertype.valueobject.UserTypeDescription;
 import br.com.postechfiap.toloni.restauranthub.domain.usertype.valueobject.UserTypeId;
+import br.com.postechfiap.toloni.restauranthub.domain.usertype.valueobject.UserTypeName;
 
 /// Use case responsible for retrieving a paginated list of [UserType] instances.
 ///
@@ -33,7 +35,7 @@ public class FindAllUserTypesUseCase {
     /// @param name        the name of the user type
     /// @param description the description of the user type
     /// @param role        the [UserRole] of the user type
-    public record Output(UserTypeId id, String name, String description, UserRole role) {
+    public record Output(UserTypeId id, UserTypeName name, UserTypeDescription description, UserRole role) {
     }
 
     /// Executes the use case with the given input.
@@ -47,8 +49,8 @@ public class FindAllUserTypesUseCase {
                 .stream()
                 .map(userType -> new Output(
                         userType.getId(),
-                        userType.getName().getValue(),
-                        userType.getDescription().getValue(),
+                        userType.getName(),
+                        userType.getDescription(),
                         userType.getRole()
                 ))
                 .toList();

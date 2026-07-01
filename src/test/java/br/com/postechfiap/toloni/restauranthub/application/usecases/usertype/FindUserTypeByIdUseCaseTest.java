@@ -59,8 +59,8 @@ class FindUserTypeByIdUseCaseTest {
 
         assertThat(output).isNotNull();
         assertThat(output.id()).isEqualTo(id);
-        assertThat(output.name()).isEqualTo(userType.getName().getValue());
-        assertThat(output.description()).isEqualTo(userType.getDescription().getValue());
+        assertThat(output.name()).isEqualTo(userType.getName());
+        assertThat(output.description()).isEqualTo(userType.getDescription());
         assertThat(output.role()).isEqualTo(userType.getRole());
     }
 
@@ -72,8 +72,8 @@ class FindUserTypeByIdUseCaseTest {
         var output = useCase.execute(new FindUserTypeByIdUseCase.Input(id));
 
         assertThat(output.id()).isEqualTo(userType.getId());
-        assertThat(output.name()).isEqualTo("Restaurant Owner");
-        assertThat(output.description()).isEqualTo("Owns and manages a restaurant");
+        assertThat(output.name().getValue()).isEqualTo("Restaurant Owner");
+        assertThat(output.description().getValue()).isEqualTo("Owns and manages a restaurant");
         assertThat(output.role()).isEqualTo(UserRole.RESTAURANT_OWNER);
     }
 

@@ -1,9 +1,14 @@
 package br.com.postechfiap.toloni.restauranthub.infrastructure.persistence.repositories;
 
 import br.com.postechfiap.toloni.restauranthub.infrastructure.persistence.entities.UserJpaEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /// Spring Data JPA repository for [UserJpaEntity].
@@ -12,6 +17,34 @@ import java.util.UUID;
 /// operations, pagination, and dynamic specification-based filtering.
 public interface UserJpaRepository extends JpaRepository<UserJpaEntity, UUID>,
         JpaSpecificationExecutor<UserJpaEntity> {
+
+    /// Returns a paginated list of all users, eagerly fetching the associated [UserTypeJpaEntity]
+    /// to avoid N+1 queries when accessing [UserJpaEntity#getUserType()].
+    ///
+    /// @param pageable the pagination parameters
+    /// @return a [Page] of [UserJpaEntity] with userType loaded
+    @EntityGraph(value = "User.withUserType")
+    @Override
+    Page<UserJpaEntity> findAll(Pageable pageable);
+
+    /// Returns a filtered and paginated list of users matching the given specification,
+    /// eagerly fetching the associated [UserTypeJpaEntity].
+    ///
+    /// @param spec     the [Specification] to filter users
+    /// @param pageable the pagination parameters
+    /// @return a [Page] of [UserJpaEntity] with userType loaded
+    @EntityGraph(value = "User.withUserType")
+    @Override
+    Page<UserJpaEntity> findAll(Specification<UserJpaEntity> spec, Pageable pageable);
+
+    /// Returns a user by its id, eagerly fetching the associated [UserTypeJpaEntity]
+    /// to avoid a lazy-load on [UserJpaEntity#getUserType()].
+    ///
+    /// @param id the UUID of the user
+    /// @return an [Optional] containing the [UserJpaEntity] with userType loaded, or empty if not found
+    @EntityGraph(value = "User.withUserType")
+    @Override
+    Optional<UserJpaEntity> findById(UUID id);
 
     /// Checks whether a user with the given email exists.
     ///
@@ -31,4 +64,5 @@ public interface UserJpaRepository extends JpaRepository<UserJpaEntity, UUID>,
     /// @param userTypeId the user type UUID to check
     /// @return `true` if at least one user has that user type
     boolean existsByUserTypeId(UUID userTypeId);
+
 }

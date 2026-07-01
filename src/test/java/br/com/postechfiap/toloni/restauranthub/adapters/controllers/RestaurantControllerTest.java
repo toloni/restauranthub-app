@@ -146,8 +146,8 @@ class RestaurantControllerTest {
     void shouldDelegateFindByIdToFindRestaurantByIdUseCase() {
         var input = new FindRestaurantByIdUseCase.Input(restaurantId);
         var output = new FindRestaurantByIdUseCase.Output(
-                restaurantId, "The Great Burger", "123 Main St, Springfield", "American",
-                "Mon-Fri 9am-10pm", ownerId, "John Doe"
+                restaurantId, RestaurantName.of("The Great Burger"), RestaurantAddress.of("123 Main St, Springfield"), RestaurantCuisineType.of("American"),
+                RestaurantOpeningHours.of("Mon-Fri 9am-10pm"), ownerId, "John Doe"
         );
         var viewModel = new RestaurantViewModel(
                 restaurantId.getValue(), "The Great Burger", "123 Main St, Springfield",
@@ -174,8 +174,8 @@ class RestaurantControllerTest {
         var pageRequest = PageRequest.of(0, 10);
         var input = new FindAllRestaurantsUseCase.Input(pageRequest);
         var output = new FindAllRestaurantsUseCase.Output(
-                restaurantId, "The Great Burger", "123 Main St, Springfield", "American",
-                "Mon-Fri 9am-10pm", ownerId, "John Doe"
+                restaurantId, RestaurantName.of("The Great Burger"), RestaurantAddress.of("123 Main St, Springfield"), RestaurantCuisineType.of("American"),
+                RestaurantOpeningHours.of("Mon-Fri 9am-10pm"), ownerId, "John Doe"
         );
         var viewModel = new RestaurantViewModel(
                 restaurantId.getValue(), "The Great Burger", "123 Main St, Springfield",

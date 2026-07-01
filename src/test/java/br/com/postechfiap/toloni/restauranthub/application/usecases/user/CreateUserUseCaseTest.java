@@ -75,8 +75,8 @@ class CreateUserUseCaseTest {
 
         assertThat(output).isNotNull();
         assertThat(output.id()).isNotNull();
-        assertThat(output.name()).isEqualTo(input.name());
-        assertThat(output.email()).isEqualTo(input.email());
+        assertThat(output.name().getValue()).isEqualTo(input.name());
+        assertThat(output.email().getValue()).isEqualTo(input.email());
         assertThat(output.userTypeId()).isEqualTo(userTypeId);
     }
 
@@ -143,7 +143,7 @@ class CreateUserUseCaseTest {
 
         var output = useCase.execute(uppercaseEmailInput);
 
-        assertThat(output.email()).isEqualTo("john@example.com");
+        assertThat(output.email().getValue()).isEqualTo("john@example.com");
     }
 
     @Test

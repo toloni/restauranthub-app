@@ -98,7 +98,7 @@ class UpdateMenuItemUseCaseTest {
 
         var output = useCase.execute(input);
 
-        assertThat(output.name()).isEqualTo("Bacon Burger");
+        assertThat(output.name().getValue()).isEqualTo("Bacon Burger");
     }
 
     @Test
@@ -117,7 +117,7 @@ class UpdateMenuItemUseCaseTest {
 
         var output = useCase.execute(input);
 
-        assertThat(output.description()).isEqualTo("New description");
+        assertThat(output.description().getValue()).isEqualTo("New description");
     }
 
     @Test
@@ -137,7 +137,7 @@ class UpdateMenuItemUseCaseTest {
 
         var output = useCase.execute(input);
 
-        assertThat(output.price()).isEqualByComparingTo(new BigDecimal("24.90"));
+        assertThat(output.price().getAmount()).isEqualByComparingTo(new BigDecimal("24.90"));
     }
 
     @Test
@@ -175,7 +175,7 @@ class UpdateMenuItemUseCaseTest {
 
         var output = useCase.execute(input);
 
-        assertThat(output.imagePath()).isEqualTo("/images/new.jpg");
+        assertThat(output.imagePath().getValue()).isEqualTo("/images/new.jpg");
     }
 
     @Test
@@ -196,11 +196,11 @@ class UpdateMenuItemUseCaseTest {
 
         var output = useCase.execute(input);
 
-        assertThat(output.name()).isEqualTo("Bacon Burger");
-        assertThat(output.description()).isEqualTo("Double patty with bacon");
-        assertThat(output.price()).isEqualByComparingTo(new BigDecimal("24.90"));
+        assertThat(output.name().getValue()).isEqualTo("Bacon Burger");
+        assertThat(output.description().getValue()).isEqualTo("Double patty with bacon");
+        assertThat(output.price().getAmount()).isEqualByComparingTo(new BigDecimal("24.90"));
         assertThat(output.dineInOnly()).isTrue();
-        assertThat(output.imagePath()).isEqualTo("/images/bacon-burger.jpg");
+        assertThat(output.imagePath().getValue()).isEqualTo("/images/bacon-burger.jpg");
     }
 
     @Test
@@ -231,7 +231,7 @@ class UpdateMenuItemUseCaseTest {
 
         var output = useCase.execute(input);
 
-        assertThat(output.price()).isEqualByComparingTo(new BigDecimal("19.90"));
+        assertThat(output.price().getAmount()).isEqualByComparingTo(new BigDecimal("19.90"));
     }
 
     @Test

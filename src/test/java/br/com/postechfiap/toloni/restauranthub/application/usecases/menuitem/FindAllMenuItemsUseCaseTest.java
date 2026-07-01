@@ -99,12 +99,11 @@ class FindAllMenuItemsUseCaseTest {
 
         var first = output.content().getFirst();
         assertThat(first.id()).isEqualTo(burgerMenuItem.getId());
-        assertThat(first.name()).isEqualTo(burgerMenuItem.getName().getValue());
-        assertThat(first.description()).isEqualTo(burgerMenuItem.getDescription().getValue());
-        assertThat(first.price()).isEqualByComparingTo(burgerMenuItem.getPrice().getAmount());
-        assertThat(first.currency()).isEqualTo(burgerMenuItem.getPrice().getCurrency());
+        assertThat(first.name()).isEqualTo(burgerMenuItem.getName());
+        assertThat(first.description()).isEqualTo(burgerMenuItem.getDescription());
+        assertThat(first.price()).isEqualTo(burgerMenuItem.getPrice());
         assertThat(first.dineInOnly()).isEqualTo(burgerMenuItem.isDineInOnly());
-        assertThat(first.imagePath()).isEqualTo(burgerMenuItem.getImagePath().getValue());
+        assertThat(first.imagePath()).isEqualTo(burgerMenuItem.getImagePath());
         assertThat(first.restaurantId()).isEqualTo(restaurantId);
         assertThat(first.restaurantName()).isEqualTo("The Great Burger");
     }
@@ -240,7 +239,7 @@ class FindAllMenuItemsUseCaseTest {
         var output = useCase.execute(new FindAllMenuItemsUseCase.Input(null, pageRequest));
 
         assertThat(output.content()).hasSize(1);
-        assertThat(output.content().getFirst().name()).isEqualTo("Classic Burger");
+        assertThat(output.content().getFirst().name().getValue()).isEqualTo("Classic Burger");
     }
 
     @Test
@@ -259,7 +258,7 @@ class FindAllMenuItemsUseCaseTest {
 
         var output = useCase.execute(new FindAllMenuItemsUseCase.Input(null, pageRequest));
 
-        assertThat(output.content().getFirst().name()).isEqualTo("Classic Burger");
-        assertThat(output.content().get(1).name()).isEqualTo("Truffle Fries");
+        assertThat(output.content().getFirst().name().getValue()).isEqualTo("Classic Burger");
+        assertThat(output.content().get(1).name().getValue()).isEqualTo("Truffle Fries");
     }
 }

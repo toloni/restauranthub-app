@@ -101,12 +101,12 @@ class CreateMenuItemUseCaseTest {
 
         assertThat(output).isNotNull();
         assertThat(output.id()).isNotNull();
-        assertThat(output.name()).isEqualTo(input.name());
-        assertThat(output.description()).isEqualTo(input.description());
-        assertThat(output.price()).isEqualByComparingTo(input.price());
-        assertThat(output.currency()).isEqualTo(input.currency());
+        assertThat(output.name().getValue()).isEqualTo(input.name());
+        assertThat(output.description().getValue()).isEqualTo(input.description());
+        assertThat(output.price().getAmount()).isEqualByComparingTo(input.price());
+        assertThat(output.price().getCurrency()).isEqualTo(input.currency());
         assertThat(output.dineInOnly()).isEqualTo(input.dineInOnly());
-        assertThat(output.imagePath()).isEqualTo(input.imagePath());
+        assertThat(output.imagePath().getValue()).isEqualTo(input.imagePath());
         assertThat(output.restaurantId()).isEqualTo(restaurantId);
     }
 
@@ -173,7 +173,7 @@ class CreateMenuItemUseCaseTest {
 
         var output = useCase.execute(noImageInput);
 
-        assertThat(output.imagePath()).isNull();
+        assertThat(output.imagePath().getValue()).isNull();
     }
 
     @Test

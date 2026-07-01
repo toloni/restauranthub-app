@@ -5,7 +5,8 @@ import br.com.postechfiap.toloni.restauranthub.adapters.presenters.menuitem.Menu
 import br.com.postechfiap.toloni.restauranthub.application.pagination.Page;
 import br.com.postechfiap.toloni.restauranthub.application.pagination.PageRequest;
 import br.com.postechfiap.toloni.restauranthub.application.usecases.menuitem.*;
-import br.com.postechfiap.toloni.restauranthub.domain.menuitem.valueobject.MenuItemId;
+import br.com.postechfiap.toloni.restauranthub.domain.menuitem.valueobject.*;
+
 import br.com.postechfiap.toloni.restauranthub.domain.restaurant.valueobject.RestaurantId;
 import br.com.postechfiap.toloni.restauranthub.domain.user.valueobject.UserId;
 import org.junit.jupiter.api.BeforeEach;
@@ -79,12 +80,11 @@ class MenuItemControllerTest {
         );
         var output = new CreateMenuItemUseCase.Output(
                 menuItemId,
-                "Classic Burger",
-                "Juicy beef patty with lettuce and tomato",
-                new BigDecimal("19.90"),
-                Currency.getInstance("BRL"),
+                MenuItemName.of("Classic Burger"),
+                MenuItemDescription.of("Juicy beef patty with lettuce and tomato"),
+                MenuItemPrice.of(new BigDecimal("19.90"), Currency.getInstance("BRL")),
                 false,
-                "/images/classic-burger.jpg",
+                MenuItemImagePath.of("/images/classic-burger.jpg"),
                 restaurantId
         );
         var viewModel = new MenuItemViewModel(
@@ -115,12 +115,11 @@ class MenuItemControllerTest {
         );
         var output = new UpdateMenuItemUseCase.Output(
                 menuItemId,
-                "Bacon Burger",
-                "Juicy beef patty with lettuce and tomato",
-                new BigDecimal("19.90"),
-                Currency.getInstance("BRL"),
+                MenuItemName.of("Bacon Burger"),
+                MenuItemDescription.of("Juicy beef patty with lettuce and tomato"),
+                MenuItemPrice.of(new BigDecimal("19.90"), Currency.getInstance("BRL")),
                 false,
-                "/images/classic-burger.jpg",
+                MenuItemImagePath.of("/images/classic-burger.jpg"),
                 restaurantId
         );
         var viewModel = new MenuItemViewModel(
@@ -165,12 +164,11 @@ class MenuItemControllerTest {
         var input = new FindMenuItemByIdUseCase.Input(menuItemId);
         var output = new FindMenuItemByIdUseCase.Output(
                 menuItemId,
-                "Classic Burger",
-                "Juicy beef patty with lettuce and tomato",
-                new BigDecimal("19.90"),
-                Currency.getInstance("BRL"),
+                MenuItemName.of("Classic Burger"),
+                MenuItemDescription.of("Juicy beef patty with lettuce and tomato"),
+                MenuItemPrice.of(new BigDecimal("19.90"), Currency.getInstance("BRL")),
                 false,
-                "/images/classic-burger.jpg",
+                MenuItemImagePath.of("/images/classic-burger.jpg"),
                 restaurantId,
                 "The Great Burger"
         );
@@ -201,12 +199,11 @@ class MenuItemControllerTest {
         var input = new FindAllMenuItemsUseCase.Input(null, pageRequest);
         var output = new FindAllMenuItemsUseCase.Output(
                 menuItemId,
-                "Classic Burger",
-                "Juicy beef patty with lettuce and tomato",
-                new BigDecimal("19.90"),
-                Currency.getInstance("BRL"),
+                MenuItemName.of("Classic Burger"),
+                MenuItemDescription.of("Juicy beef patty with lettuce and tomato"),
+                MenuItemPrice.of(new BigDecimal("19.90"), Currency.getInstance("BRL")),
                 false,
-                "/images/classic-burger.jpg",
+                MenuItemImagePath.of("/images/classic-burger.jpg"),
                 restaurantId,
                 "The Great Burger"
         );

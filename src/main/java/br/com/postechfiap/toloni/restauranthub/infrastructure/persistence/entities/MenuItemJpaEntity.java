@@ -10,6 +10,7 @@ import java.util.Currency;
 import java.util.UUID;
 
 /// JPA entity representing a [MenuItem] in the persistence layer.
+@NamedEntityGraph(name = "MenuItem.withRestaurant", attributeNodes = @NamedAttributeNode("restaurant"))
 @Entity
 @Table(name = "menu_items")
 public class MenuItemJpaEntity {

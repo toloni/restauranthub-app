@@ -67,12 +67,11 @@ class FindMenuItemByIdUseCaseTest {
 
         assertThat(output).isNotNull();
         assertThat(output.id()).isEqualTo(id);
-        assertThat(output.name()).isEqualTo(menuItem.getName().getValue());
-        assertThat(output.description()).isEqualTo(menuItem.getDescription().getValue());
-        assertThat(output.price()).isEqualByComparingTo(menuItem.getPrice().getAmount());
-        assertThat(output.currency()).isEqualTo(menuItem.getPrice().getCurrency());
+        assertThat(output.name()).isEqualTo(menuItem.getName());
+        assertThat(output.description()).isEqualTo(menuItem.getDescription());
+        assertThat(output.price()).isEqualTo(menuItem.getPrice());
         assertThat(output.dineInOnly()).isEqualTo(menuItem.isDineInOnly());
-        assertThat(output.imagePath()).isEqualTo(menuItem.getImagePath().getValue());
+        assertThat(output.imagePath()).isEqualTo(menuItem.getImagePath());
         assertThat(output.restaurantId()).isEqualTo(restaurantId);
         assertThat(output.restaurantName()).isEqualTo("The Great Burger");
     }
@@ -87,12 +86,12 @@ class FindMenuItemByIdUseCaseTest {
         var output = useCase.execute(new FindMenuItemByIdUseCase.Input(id));
 
         assertThat(output.id()).isEqualTo(menuItem.getId());
-        assertThat(output.name()).isEqualTo("Classic Burger");
-        assertThat(output.description()).isEqualTo("Juicy beef patty with lettuce and tomato");
-        assertThat(output.price()).isEqualByComparingTo(new BigDecimal("19.90"));
-        assertThat(output.currency()).isEqualTo(Currency.getInstance("BRL"));
+        assertThat(output.name().getValue()).isEqualTo("Classic Burger");
+        assertThat(output.description().getValue()).isEqualTo("Juicy beef patty with lettuce and tomato");
+        assertThat(output.price().getAmount()).isEqualByComparingTo(new BigDecimal("19.90"));
+        assertThat(output.price().getCurrency()).isEqualTo(Currency.getInstance("BRL"));
         assertThat(output.dineInOnly()).isFalse();
-        assertThat(output.imagePath()).isEqualTo("/images/classic-burger.jpg");
+        assertThat(output.imagePath().getValue()).isEqualTo("/images/classic-burger.jpg");
         assertThat(output.restaurantId()).isEqualTo(restaurantId);
         assertThat(output.restaurantName()).isEqualTo("The Great Burger");
     }

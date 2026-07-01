@@ -11,6 +11,7 @@ import jakarta.persistence.*;
 import java.util.UUID;
 
 /// JPA entity representing a [User] in the persistence layer.
+@NamedEntityGraph(name = "User.withUserType", attributeNodes = @NamedAttributeNode("userType"))
 @Entity
 @Table(name = "users")
 public class UserJpaEntity {

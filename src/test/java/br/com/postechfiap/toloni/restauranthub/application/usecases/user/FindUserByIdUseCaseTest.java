@@ -66,8 +66,8 @@ class FindUserByIdUseCaseTest {
 
         assertThat(output).isNotNull();
         assertThat(output.id()).isEqualTo(id);
-        assertThat(output.name()).isEqualTo(user.getName().getValue());
-        assertThat(output.email()).isEqualTo(user.getEmail().getValue());
+        assertThat(output.name()).isEqualTo(user.getName());
+        assertThat(output.email()).isEqualTo(user.getEmail());
         assertThat(output.userTypeId()).isEqualTo(userTypeId);
         assertThat(output.userTypeName()).isEqualTo("Restaurant Owner");
     }
@@ -82,8 +82,8 @@ class FindUserByIdUseCaseTest {
         var output = useCase.execute(new FindUserByIdUseCase.Input(id));
 
         assertThat(output.id()).isEqualTo(user.getId());
-        assertThat(output.name()).isEqualTo("John Doe");
-        assertThat(output.email()).isEqualTo("john@example.com");
+        assertThat(output.name().getValue()).isEqualTo("John Doe");
+        assertThat(output.email().getValue()).isEqualTo("john@example.com");
         assertThat(output.userTypeId()).isEqualTo(userTypeId);
         assertThat(output.userTypeName()).isEqualTo("Restaurant Owner");
     }

@@ -1,7 +1,7 @@
 package br.com.postechfiap.toloni.restauranthub.application.usecases.restaurant;
 
 import br.com.postechfiap.toloni.restauranthub.application.gateways.RestaurantGateway;
-import br.com.postechfiap.toloni.restauranthub.domain.restaurant.valueobject.RestaurantId;
+import br.com.postechfiap.toloni.restauranthub.domain.restaurant.valueobject.*;
 import br.com.postechfiap.toloni.restauranthub.domain.shared.exception.NotFoundException;
 import br.com.postechfiap.toloni.restauranthub.domain.user.valueobject.UserId;
 
@@ -37,8 +37,9 @@ public class FindRestaurantByIdUseCase {
     /// @param openingHours the opening hours of the restaurant
     /// @param ownerId      the [UserId] of the owner of the restaurant
     /// @param ownerName    the name of the owner of the restaurant
-    public record Output(RestaurantId id, String name, String address, String cuisineType,
-                         String openingHours, UserId ownerId, String ownerName) {
+    public record Output(RestaurantId id, RestaurantName name, RestaurantAddress address,
+                         RestaurantCuisineType cuisineType, RestaurantOpeningHours openingHours,
+                         UserId ownerId, String ownerName) {
     }
 
     /// Executes the use case with the given input.
@@ -50,10 +51,10 @@ public class FindRestaurantByIdUseCase {
         return restaurantGateway.findByIdWithOwnerName(input.id())
                 .map(enriched -> new Output(
                         enriched.restaurant().getId(),
-                        enriched.restaurant().getName().getValue(),
-                        enriched.restaurant().getAddress().getValue(),
-                        enriched.restaurant().getCuisineType().getValue(),
-                        enriched.restaurant().getOpeningHours().getValue(),
+                        enriched.restaurant().getName(),
+                        enriched.restaurant().getAddress(),
+                        enriched.restaurant().getCuisineType(),
+                        enriched.restaurant().getOpeningHours(),
                         enriched.restaurant().getOwnerId(),
                         enriched.ownerName()
                 ))

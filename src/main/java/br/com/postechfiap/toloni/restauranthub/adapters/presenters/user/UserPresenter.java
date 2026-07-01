@@ -18,8 +18,8 @@ public class UserPresenter {
     public UserViewModel present(CreateUserUseCase.Output output) {
         return new UserViewModel(
                 output.id().getValue(),
-                output.name(),
-                output.email(),
+                output.name().getValue(),
+                output.email().getValue(),
                 output.userTypeId().getValue(),
                 null
         );
@@ -32,8 +32,8 @@ public class UserPresenter {
     public UserViewModel present(UpdateUserUseCase.Output output) {
         return new UserViewModel(
                 output.id().getValue(),
-                output.name(),
-                output.email(),
+                output.name().getValue(),
+                output.email().getValue(),
                 output.userTypeId().getValue(),
                 null
         );
@@ -46,8 +46,8 @@ public class UserPresenter {
     public UserViewModel present(FindUserByIdUseCase.Output output) {
         return new UserViewModel(
                 output.id().getValue(),
-                output.name(),
-                output.email(),
+                output.name().getValue(),
+                output.email().getValue(),
                 output.userTypeId().getValue(),
                 output.userTypeName()
         );
@@ -60,8 +60,8 @@ public class UserPresenter {
     public UserViewModel present(FindAllUsersUseCase.Output output) {
         return new UserViewModel(
                 output.id().getValue(),
-                output.name(),
-                output.email(),
+                output.name().getValue(),
+                output.email().getValue(),
                 output.userTypeId().getValue(),
                 output.userTypeName()
         );

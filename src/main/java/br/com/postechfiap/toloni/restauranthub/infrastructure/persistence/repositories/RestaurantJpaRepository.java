@@ -1,9 +1,14 @@
 package br.com.postechfiap.toloni.restauranthub.infrastructure.persistence.repositories;
 
 import br.com.postechfiap.toloni.restauranthub.infrastructure.persistence.entities.RestaurantJpaEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /// Spring Data JPA repository for [RestaurantJpaEntity].
@@ -12,6 +17,34 @@ import java.util.UUID;
 /// operations, pagination, and dynamic specification-based filtering.
 public interface RestaurantJpaRepository extends JpaRepository<RestaurantJpaEntity, UUID>,
         JpaSpecificationExecutor<RestaurantJpaEntity> {
+
+    /// Returns a paginated list of all restaurants, eagerly fetching the associated [UserJpaEntity] owner
+    /// to avoid N+1 queries when accessing [RestaurantJpaEntity#getOwner()].
+    ///
+    /// @param pageable the pagination parameters
+    /// @return a [Page] of [RestaurantJpaEntity] with owner loaded
+    @EntityGraph(value = "Restaurant.withOwner")
+    @Override
+    Page<RestaurantJpaEntity> findAll(Pageable pageable);
+
+    /// Returns a filtered and paginated list of restaurants matching the given specification,
+    /// eagerly fetching the associated [UserJpaEntity] owner.
+    ///
+    /// @param spec     the [Specification] to filter restaurants
+    /// @param pageable the pagination parameters
+    /// @return a [Page] of [RestaurantJpaEntity] with owner loaded
+    @EntityGraph(value = "Restaurant.withOwner")
+    @Override
+    Page<RestaurantJpaEntity> findAll(Specification<RestaurantJpaEntity> spec, Pageable pageable);
+
+    /// Returns a restaurant by its id, eagerly fetching the associated [UserJpaEntity] owner
+    /// to avoid a lazy-load on [RestaurantJpaEntity#getOwner()].
+    ///
+    /// @param id the UUID of the restaurant
+    /// @return an [Optional] containing the [RestaurantJpaEntity] with owner loaded, or empty if not found
+    @EntityGraph(value = "Restaurant.withOwner")
+    @Override
+    Optional<RestaurantJpaEntity> findById(UUID id);
 
     /// Checks whether a restaurant with the given name exists.
     ///

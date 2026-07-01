@@ -43,7 +43,7 @@ public class CreateUserTypeUseCase {
     /// @param name        the name of the created user type
     /// @param description the description of the created user type
     /// @param role        the [UserRole] of the created user type
-    public record Output(UserTypeId id, String name, String description, UserRole role) {
+    public record Output(UserTypeId id, UserTypeName name, UserTypeDescription description, UserRole role) {
     }
 
     /// Executes the use case with the given input.
@@ -66,8 +66,8 @@ public class CreateUserTypeUseCase {
 
         return new Output(
                 saved.getId(),
-                saved.getName().getValue(),
-                saved.getDescription().getValue(),
+                saved.getName(),
+                saved.getDescription(),
                 saved.getRole()
         );
     }

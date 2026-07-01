@@ -47,7 +47,7 @@ public class UpdateUserTypeUseCase {
     /// @param name        the name of the updated user type
     /// @param description the description of the updated user type
     /// @param role        the [UserRole] of the updated user type
-    public record Output(UserTypeId id, String name, String description, UserRole role) {
+    public record Output(UserTypeId id, UserTypeName name, UserTypeDescription description, UserRole role) {
     }
 
     /// Executes the use case with the given input.
@@ -73,8 +73,8 @@ public class UpdateUserTypeUseCase {
 
         return new Output(
                 saved.getId(),
-                saved.getName().getValue(),
-                saved.getDescription().getValue(),
+                saved.getName(),
+                saved.getDescription(),
                 saved.getRole()
         );
     }

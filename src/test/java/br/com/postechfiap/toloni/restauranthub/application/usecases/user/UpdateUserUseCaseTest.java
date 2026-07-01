@@ -73,7 +73,7 @@ class UpdateUserUseCaseTest {
 
         var output = useCase.execute(input);
 
-        assertThat(output.name()).isEqualTo("Jane Doe");
+        assertThat(output.name().getValue()).isEqualTo("Jane Doe");
     }
 
     @Test
@@ -89,7 +89,7 @@ class UpdateUserUseCaseTest {
 
         var output = useCase.execute(input);
 
-        assertThat(output.email()).isEqualTo("jane@example.com");
+        assertThat(output.email().getValue()).isEqualTo("jane@example.com");
     }
 
     @Test
@@ -139,8 +139,8 @@ class UpdateUserUseCaseTest {
 
         var output = useCase.execute(input);
 
-        assertThat(output.name()).isEqualTo("Jane Doe");
-        assertThat(output.email()).isEqualTo("jane@example.com");
+        assertThat(output.name().getValue()).isEqualTo("Jane Doe");
+        assertThat(output.email().getValue()).isEqualTo("jane@example.com");
         assertThat(output.userTypeId()).isEqualTo(newUserTypeId);
     }
 

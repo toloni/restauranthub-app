@@ -64,8 +64,8 @@ class CreateUserTypeUseCaseTest {
 
         assertThat(output).isNotNull();
         assertThat(output.id()).isNotNull();
-        assertThat(output.name()).isEqualTo(input.name());
-        assertThat(output.description()).isEqualTo(input.description());
+        assertThat(output.name().getValue()).isEqualTo(input.name());
+        assertThat(output.description().getValue()).isEqualTo(input.description());
         assertThat(output.role()).isEqualTo(input.role());
     }
 

@@ -2,12 +2,9 @@ package br.com.postechfiap.toloni.restauranthub.application.usecases.menuitem;
 
 import br.com.postechfiap.toloni.restauranthub.application.gateways.MenuItemGateway;
 import br.com.postechfiap.toloni.restauranthub.domain.menuitem.MenuItem;
-import br.com.postechfiap.toloni.restauranthub.domain.menuitem.valueobject.MenuItemId;
+import br.com.postechfiap.toloni.restauranthub.domain.menuitem.valueobject.*;
 import br.com.postechfiap.toloni.restauranthub.domain.restaurant.valueobject.RestaurantId;
 import br.com.postechfiap.toloni.restauranthub.domain.shared.exception.NotFoundException;
-
-import java.math.BigDecimal;
-import java.util.Currency;
 
 /// Use case responsible for retrieving a [MenuItem] by its identifier.
 ///
@@ -42,8 +39,8 @@ public class FindMenuItemByIdUseCase {
     /// @param dineInOnly   whether this item is available for dine-in only
     /// @param imagePath    the image path of the menu item
     /// @param restaurantId the [RestaurantId] of the restaurant this item belongs to
-    public record Output(MenuItemId id, String name, String description, BigDecimal price,
-                         Currency currency, boolean dineInOnly, String imagePath,
+    public record Output(MenuItemId id, MenuItemName name, MenuItemDescription description, MenuItemPrice price,
+                         boolean dineInOnly, MenuItemImagePath imagePath,
                          RestaurantId restaurantId, String restaurantName) {
     }
 
@@ -56,12 +53,11 @@ public class FindMenuItemByIdUseCase {
         return menuItemGateway.findByIdWithRestaurantName(input.id())
                 .map(enriched -> new Output(
                         enriched.menuItem().getId(),
-                        enriched.menuItem().getName().getValue(),
-                        enriched.menuItem().getDescription().getValue(),
-                        enriched.menuItem().getPrice().getAmount(),
-                        enriched.menuItem().getPrice().getCurrency(),
+                        enriched.menuItem().getName(),
+                        enriched.menuItem().getDescription(),
+                        enriched.menuItem().getPrice(),
                         enriched.menuItem().isDineInOnly(),
-                        enriched.menuItem().getImagePath().getValue(),
+                        enriched.menuItem().getImagePath(),
                         enriched.menuItem().getRestaurantId(),
                         enriched.restaurantName()
                 ))

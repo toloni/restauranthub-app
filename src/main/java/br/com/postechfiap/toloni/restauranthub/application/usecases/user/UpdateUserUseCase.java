@@ -50,7 +50,7 @@ public class UpdateUserUseCase {
     /// @param name       the name of the updated user
     /// @param email      the email of the updated user
     /// @param userTypeId the [UserTypeId] of the updated user
-    public record Output(UserId id, String name, String email, UserTypeId userTypeId) {
+    public record Output(UserId id, UserName name, UserEmail email, UserTypeId userTypeId) {
     }
 
     /// Executes the use case with the given input.
@@ -83,8 +83,8 @@ public class UpdateUserUseCase {
 
         return new Output(
                 saved.getId(),
-                saved.getName().getValue(),
-                saved.getEmail().getValue(),
+                saved.getName(),
+                saved.getEmail(),
                 saved.getUserTypeId()
         );
     }

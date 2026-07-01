@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 import java.util.UUID;
 
 /// JPA entity representing a [Restaurant] in the persistence layer.
+@NamedEntityGraph(name = "Restaurant.withOwner", attributeNodes = @NamedAttributeNode("owner"))
 @Entity
 @Table(name = "restaurants")
 public class RestaurantJpaEntity {

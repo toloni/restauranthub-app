@@ -64,10 +64,10 @@ class FindRestaurantByIdUseCaseTest {
 
         assertThat(output).isNotNull();
         assertThat(output.id()).isEqualTo(id);
-        assertThat(output.name()).isEqualTo(restaurant.getName().getValue());
-        assertThat(output.address()).isEqualTo(restaurant.getAddress().getValue());
-        assertThat(output.cuisineType()).isEqualTo(restaurant.getCuisineType().getValue());
-        assertThat(output.openingHours()).isEqualTo(restaurant.getOpeningHours().getValue());
+        assertThat(output.name()).isEqualTo(restaurant.getName());
+        assertThat(output.address()).isEqualTo(restaurant.getAddress());
+        assertThat(output.cuisineType()).isEqualTo(restaurant.getCuisineType());
+        assertThat(output.openingHours()).isEqualTo(restaurant.getOpeningHours());
         assertThat(output.ownerId()).isEqualTo(ownerId);
         assertThat(output.ownerName()).isEqualTo("John Doe");
     }
@@ -82,10 +82,10 @@ class FindRestaurantByIdUseCaseTest {
         var output = useCase.execute(new FindRestaurantByIdUseCase.Input(id));
 
         assertThat(output.id()).isEqualTo(restaurant.getId());
-        assertThat(output.name()).isEqualTo("The Great Burger");
-        assertThat(output.address()).isEqualTo("123 Main St, Springfield");
-        assertThat(output.cuisineType()).isEqualTo("American");
-        assertThat(output.openingHours()).isEqualTo("Mon-Fri 9am-10pm");
+        assertThat(output.name().getValue()).isEqualTo("The Great Burger");
+        assertThat(output.address().getValue()).isEqualTo("123 Main St, Springfield");
+        assertThat(output.cuisineType().getValue()).isEqualTo("American");
+        assertThat(output.openingHours().getValue()).isEqualTo("Mon-Fri 9am-10pm");
         assertThat(output.ownerId()).isEqualTo(ownerId);
         assertThat(output.ownerName()).isEqualTo("John Doe");
     }

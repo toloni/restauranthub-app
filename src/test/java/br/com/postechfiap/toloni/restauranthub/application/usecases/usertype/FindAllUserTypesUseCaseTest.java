@@ -86,8 +86,8 @@ class FindAllUserTypesUseCaseTest {
 
         var first = output.content().get(0);
         assertThat(first.id()).isEqualTo(restaurantOwnerType.getId());
-        assertThat(first.name()).isEqualTo(restaurantOwnerType.getName().getValue());
-        assertThat(first.description()).isEqualTo(restaurantOwnerType.getDescription().getValue());
+        assertThat(first.name()).isEqualTo(restaurantOwnerType.getName());
+        assertThat(first.description()).isEqualTo(restaurantOwnerType.getDescription());
         assertThat(first.role()).isEqualTo(restaurantOwnerType.getRole());
     }
 
@@ -164,7 +164,7 @@ class FindAllUserTypesUseCaseTest {
         var output = useCase.execute(new FindAllUserTypesUseCase.Input(pageRequest));
 
         assertThat(output.content()).hasSize(1);
-        assertThat(output.content().get(0).name()).isEqualTo("Restaurant Owner");
+        assertThat(output.content().get(0).name().getValue()).isEqualTo("Restaurant Owner");
     }
 
     @Test
@@ -180,7 +180,7 @@ class FindAllUserTypesUseCaseTest {
         var output = useCase.execute(new FindAllUserTypesUseCase.Input(pageRequest));
 
         assertThat(output.content()).hasSize(2);
-        assertThat(output.content().get(0).name()).isEqualTo("Customer");
-        assertThat(output.content().get(1).name()).isEqualTo("Restaurant Owner");
+        assertThat(output.content().get(0).name().getValue()).isEqualTo("Customer");
+        assertThat(output.content().get(1).name().getValue()).isEqualTo("Restaurant Owner");
     }
 }

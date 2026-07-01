@@ -5,7 +5,9 @@ import br.com.postechfiap.toloni.restauranthub.adapters.presenters.user.UserView
 import br.com.postechfiap.toloni.restauranthub.application.pagination.Page;
 import br.com.postechfiap.toloni.restauranthub.application.pagination.PageRequest;
 import br.com.postechfiap.toloni.restauranthub.application.usecases.user.*;
+import br.com.postechfiap.toloni.restauranthub.domain.user.valueobject.UserEmail;
 import br.com.postechfiap.toloni.restauranthub.domain.user.valueobject.UserId;
+import br.com.postechfiap.toloni.restauranthub.domain.user.valueobject.UserName;
 import br.com.postechfiap.toloni.restauranthub.domain.usertype.valueobject.UserTypeId;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -63,7 +65,7 @@ class UserControllerTest {
     @DisplayName("Should delegate create to CreateUserUseCase and present result")
     void shouldDelegateCreateToCreateUserUseCase() {
         var input = new CreateUserUseCase.Input("John Doe", "john@example.com", "password123", userTypeId);
-        var output = new CreateUserUseCase.Output(id, "John Doe", "john@example.com", userTypeId);
+        var output = new CreateUserUseCase.Output(id, UserName.of("John Doe"), UserEmail.of("john@example.com"), userTypeId);
         var viewModel = new UserViewModel(id.getValue(), "John Doe", "john@example.com", userTypeId.getValue(), null);
 
         when(createUserUseCase.execute(input)).thenReturn(output);
@@ -84,7 +86,7 @@ class UserControllerTest {
     @DisplayName("Should delegate update to UpdateUserUseCase and present result")
     void shouldDelegateUpdateToUpdateUserUseCase() {
         var input = new UpdateUserUseCase.Input(id, "Jane Doe", null, null, null);
-        var output = new UpdateUserUseCase.Output(id, "Jane Doe", "john@example.com", userTypeId);
+        var output = new UpdateUserUseCase.Output(id, UserName.of("Jane Doe"), UserEmail.of("john@example.com"), userTypeId);
         var viewModel = new UserViewModel(id.getValue(), "Jane Doe", "john@example.com", userTypeId.getValue(), null);
 
         when(updateUserUseCase.execute(input)).thenReturn(output);
@@ -121,7 +123,7 @@ class UserControllerTest {
     @DisplayName("Should delegate findById to FindUserByIdUseCase and present result")
     void shouldDelegateFindByIdToFindUserByIdUseCase() {
         var input = new FindUserByIdUseCase.Input(id);
-        var output = new FindUserByIdUseCase.Output(id, "John Doe", "john@example.com", userTypeId, "Restaurant Owner");
+        var output = new FindUserByIdUseCase.Output(id, UserName.of("John Doe"), UserEmail.of("john@example.com"), userTypeId, "Restaurant Owner");
         var viewModel = new UserViewModel(id.getValue(), "John Doe", "john@example.com", userTypeId.getValue(), "Restaurant Owner");
 
         when(findUserByIdUseCase.execute(input)).thenReturn(output);
@@ -143,7 +145,7 @@ class UserControllerTest {
     void shouldDelegateFindAllToFindAllUsersUseCase() {
         var pageRequest = PageRequest.of(0, 10);
         var input = new FindAllUsersUseCase.Input(pageRequest);
-        var output = new FindAllUsersUseCase.Output(id, "John Doe", "john@example.com", userTypeId, "Restaurant Owner");
+        var output = new FindAllUsersUseCase.Output(id, UserName.of("John Doe"), UserEmail.of("john@example.com"), userTypeId, "Restaurant Owner");
         var viewModel = new UserViewModel(id.getValue(), "John Doe", "john@example.com", userTypeId.getValue(), "Restaurant Owner");
         var useCasePage = Page.of(List.of(output), 0, 10, 1L);
         var expectedPage = Page.of(List.of(viewModel), 0, 10, 1L);

@@ -18,12 +18,12 @@ public class MenuItemPresenter {
     public MenuItemViewModel present(CreateMenuItemUseCase.Output output) {
         return new MenuItemViewModel(
                 output.id().getValue(),
-                output.name(),
-                output.description(),
-                output.price(),
-                output.currency(),
+                output.name().getValue(),
+                output.description().getValue(),
+                output.price().getAmount(),
+                output.price().getCurrency(),
                 output.dineInOnly(),
-                output.imagePath(),
+                output.imagePath().getValue(),
                 output.restaurantId().getValue(),
                 null
         );
@@ -36,12 +36,12 @@ public class MenuItemPresenter {
     public MenuItemViewModel present(UpdateMenuItemUseCase.Output output) {
         return new MenuItemViewModel(
                 output.id().getValue(),
-                output.name(),
-                output.description(),
-                output.price(),
-                output.currency(),
+                output.name().getValue(),
+                output.description().getValue(),
+                output.price().getAmount(),
+                output.price().getCurrency(),
                 output.dineInOnly(),
-                output.imagePath(),
+                output.imagePath().getValue(),
                 output.restaurantId().getValue(),
                 null
         );
@@ -54,12 +54,12 @@ public class MenuItemPresenter {
     public MenuItemViewModel present(FindMenuItemByIdUseCase.Output output) {
         return new MenuItemViewModel(
                 output.id().getValue(),
-                output.name(),
-                output.description(),
-                output.price(),
-                output.currency(),
+                output.name().getValue(),
+                output.description().getValue(),
+                output.price().getAmount(),
+                output.price().getCurrency(),
                 output.dineInOnly(),
-                output.imagePath(),
+                output.imagePath().getValue(),
                 output.restaurantId().getValue(),
                 output.restaurantName()
         );
@@ -72,12 +72,12 @@ public class MenuItemPresenter {
     public MenuItemViewModel present(FindAllMenuItemsUseCase.Output output) {
         return new MenuItemViewModel(
                 output.id().getValue(),
-                output.name(),
-                output.description(),
-                output.price(),
-                output.currency(),
+                output.name().getValue(),
+                output.description().getValue(),
+                output.price().getAmount(),
+                output.price().getCurrency(),
                 output.dineInOnly(),
-                output.imagePath(),
+                output.imagePath().getValue(),
                 output.restaurantId().getValue(),
                 output.restaurantName()
         );

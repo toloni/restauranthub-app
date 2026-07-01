@@ -3,7 +3,9 @@ package br.com.postechfiap.toloni.restauranthub.application.usecases.user;
 import br.com.postechfiap.toloni.restauranthub.application.gateways.UserGateway;
 import br.com.postechfiap.toloni.restauranthub.domain.shared.exception.NotFoundException;
 import br.com.postechfiap.toloni.restauranthub.domain.user.User;
+import br.com.postechfiap.toloni.restauranthub.domain.user.valueobject.UserEmail;
 import br.com.postechfiap.toloni.restauranthub.domain.user.valueobject.UserId;
+import br.com.postechfiap.toloni.restauranthub.domain.user.valueobject.UserName;
 import br.com.postechfiap.toloni.restauranthub.domain.usertype.valueobject.UserTypeId;
 
 /// Use case responsible for retrieving a [User] by its identifier.
@@ -35,7 +37,7 @@ public class FindUserByIdUseCase {
     /// @param name       the name of the user
     /// @param email      the email of the user
     /// @param userTypeId the [UserTypeId] of the user
-    public record Output(UserId id, String name, String email, UserTypeId userTypeId, String userTypeName) {
+    public record Output(UserId id, UserName name, UserEmail email, UserTypeId userTypeId, String userTypeName) {
     }
 
     /// Executes the use case with the given input.
@@ -47,8 +49,8 @@ public class FindUserByIdUseCase {
         return userGateway.findByIdWithUserTypeName(input.id())
                 .map(enriched -> new Output(
                         enriched.user().getId(),
-                        enriched.user().getName().getValue(),
-                        enriched.user().getEmail().getValue(),
+                        enriched.user().getName(),
+                        enriched.user().getEmail(),
                         enriched.user().getUserTypeId(),
                         enriched.userTypeName()
                 ))
