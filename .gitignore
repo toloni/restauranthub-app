@@ -33,3 +33,5 @@ build/
 .vscode/
 .github/
 .idea/
+
+*.DS_Store*
