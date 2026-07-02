@@ -1,8 +1,9 @@
-# RestaurantHub API
+# RestaurantHub App
 
 ## Overview
 
-RestaurantHub is a shared restaurant management system that allows restaurant owners to manage their establishments
+**RestaurantHub App is a backend application** — a shared restaurant management system that allows restaurant owners to
+manage their establishments
 while customers can browse restaurants and their menus.
 
 ### Features
@@ -450,7 +451,7 @@ All `GET` list endpoints support the following query parameters:
 
 ```bash
 # Clone the repository
-git clone https://github.com/toloni/restauranthub-api.git
+git clone https://github.com/toloni/restauranthub-app.git
 cd restauranthub
 
 # Build and start all services
@@ -512,7 +513,7 @@ The `docker-compose.yml` configures two services:
 - Creates the `restauranthub_db` database on startup
 - Data is persisted via a named volume
 
-**`app`** — RestaurantHub Spring Boot application
+**`app`** — RestaurantHub App Spring Boot application
 
 - Exposes port `8080`
 - Depends on the `db` service
